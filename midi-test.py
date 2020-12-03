@@ -9,6 +9,9 @@ __author__ = 'Yoichi Tanibayashi'
 __date__   = '2020'
 
 import mido
+import pygame
+import glob
+import time
 from MyLogger import get_logger
 
 
@@ -91,6 +94,13 @@ class SampleApp:
 
         self.midi = None
         self.tempo = None
+        self.sound = []
+        self.sound_base = 20
+        self.note_base = 45
+
+        pygame.mixer.init()
+
+        self.load_wav()
 
     def main(self):
         """main
@@ -105,7 +115,7 @@ class SampleApp:
 
             for msg in track:
                 self._log.debug('msg=%s', msg)
-                print('type:%s' % (msg.type))
+                #print('type:%s' % (msg.type))
 
                 if msg.type == 'set_tempo':
                     self.tempo = msg.tempo
@@ -118,9 +128,31 @@ class SampleApp:
                 else:
                     delay = 0
 
+                self._log.debug('delay=%s', delay)
+
                 if msg.type == 'note_on':
-                    print('%s, %s, %.2f sec' % (
-                        msg.note, msg.time, delay))
+                    note_i = msg.note - self.note_base
+
+                    self._log.debug('note_i=%s', note_i)
+
+                   
+                    """
+                    while note_i < 0:
+                        note_i += 15
+
+                    while note_i > 15:
+                        note_i -= 15
+
+                    self._log.debug('note_i=%s', note_i)
+                    """
+                    
+                    """
+                    if 0 < note_i < 15:
+                        self.sound[note_i + self.sound_base].play()
+                    """
+                    self.sound[note_i + self.sound_base].play(loops=0)
+
+                    time.sleep(delay)
 
         self._log.debug('done')
 
@@ -132,6 +164,16 @@ class SampleApp:
         self._log.debug('doing ..')
 
         self._log.debug('done')
+
+    def load_wav(self, dir="./wav"):
+        """load wav files
+        """
+        self._log.debug('dir=%s', dir)
+
+        wav_files = sorted(glob.glob(dir + '/*'))
+        self._log.debug('wav_files=%s', wav_files)
+
+        self.sound = [pygame.mixer.Sound(f) for f in wav_files]
 
 
 import click
