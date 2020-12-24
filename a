@@ -1,0 +1,729 @@
+19:53:39 DEBUG MidiParser.py.__main__.main:378> midi_file=midi/cbunbun_f_c0_c2.midi
+19:53:39 DEBUG MidiParser.py.__main__.main:379> out_file=()
+19:53:39 DEBUG MidiParser.py.__main__.main:380> track=(), channel=()
+19:53:39 DEBUG MidiParser.py.SampleApp.__init__:323> midi_file=midi/cbunbun_f_c0_c2.midi
+19:53:39 DEBUG MidiParser.py.SampleApp.__init__:324> out_file=()
+19:53:39 DEBUG MidiParser.py.SampleApp.__init__:325> track=(), channel=()
+19:53:39 DEBUG MidiParser.py.MidiParser.__init__:64> midi_file=midi/cbunbun_f_c0_c2.midi
+19:53:39 DEBUG MidiParser.py.MidiParser.__init__:68> ticks_per_beet=480
+19:53:39 DEBUG MidiParser.py.SampleApp.main:342> 
+19:53:39 DEBUG MidiParser.py.MidiParser.parse:271> track=(), channel=()
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:87> midi_data={'filename': 'midi/cbunbun_f_c0_c2.midi', 'type': 1, 'ticks_per_beat': 480, 'charset': 'latin1', 'debug': False, 'clip': False, 'tracks': [<midi track '\x82Ô\x82ñ\x82Ô\x82ñ\x82Ô\x82ñ' 4 messages>, <midi track 'Track1' 81 messages>, <midi track 'Track2' 155 messages>, <midi track 'Track3' 32 messages>, <midi track 'Track4' 2 messages>, <midi track 'Track5' 2 messages>, <midi track 'Track6' 2 messages>, <midi track 'Track7' 2 messages>, <midi track 'Track8' 2 messages>, <midi track 'Track9' 2 messages>, <midi track 'Track10' 55 messages>, <midi track 'Track11' 2 messages>, <midi track 'Track12' 2 messages>, <midi track 'Track13' 2 messages>, <midi track 'Track14' 2 messages>, <midi track 'Track15' 2 messages>, <midi track 'Track16' 2 messages>, <midi track 'Track17' 2 messages>, <midi track 'Track18' 2 messages>, <midi track 'Track19' 2 messages>, <midi track 'Track20' 2 messages>, <midi track 'Track21' 2 messages>, <midi track 'Track22' 2 messages>, <midi track 'Track23' 2 messages>, <midi track 'Track24' 2 messages>, <midi track 'Track25' 2 messages>, <midi track 'Track26' 2 messages>, <midi track 'Track27' 2 messages>, <midi track 'Track28' 2 messages>, <midi track 'Track29' 2 messages>, <midi track 'Track30' 2 messages>, <midi track 'Track31' 2 messages>, <midi track 'Track32' 2 messages>, <midi track 'Track33' 2 messages>, <midi track 'Track34' 2 messages>, <midi track 'Track35' 2 messages>, <midi track 'Track36' 2 messages>, <midi track 'Track37' 2 messages>, <midi track 'Track38' 2 messages>, <midi track 'Track39' 2 messages>, <midi track 'Track40' 2 messages>, <midi track 'Track41' 2 messages>, <midi track 'Track42' 2 messages>, <midi track 'Track43' 2 messages>, <midi track 'Track44' 2 messages>, <midi track 'Track45' 2 messages>, <midi track 'Track46' 2 messages>, <midi track 'Track47' 2 messages>, <midi track 'Track48' 2 messages>]}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': '\x82Ô\x82ñ\x82Ô\x82ñ\x82Ô\x82ñ', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'time_signature', 'numerator': 2, 'denominator': 4, 'clocks_per_click': 24, 'notated_32nd_notes_per_beat': 8, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track1', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 0, 4, 127, 61)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 0, 4, 127, 61)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 1, 48, 3, 3, 0, 110, 50, 105)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 1, 48, 3, 3, 0, 110, 50, 105)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 0, 4, 127, 61)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 0, 4, 127, 61)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 1, 48, 3, 3, 0, 110, 50, 105)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 1, 48, 3, 3, 0, 110, 50, 105)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:106> cur_channel=0
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'program_change', 'time': 0, 'program': 16, 'channel': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 0, 'track': 1, 'channel': 0, 'note': 67, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 434, 'track': 1, 'channel': 0, 'note': 67, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=480, msg={'type': 'program_change', 'time': 0, 'program': 32, 'channel': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 480, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 914, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 960, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1394, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1920, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 526}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2137, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2160, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2377, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2400, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2617, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2640, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2857, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2880, 'track': 1, 'channel': 0, 'note': 60, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3314, 'track': 1, 'channel': 0, 'note': 60, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3840, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 526}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4057, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4080, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4297, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4320, 'track': 1, 'channel': 0, 'note': 67, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4537, 'track': 1, 'channel': 0, 'note': 67, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4560, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4777, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4800, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5017, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5040, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5257, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5280, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5497, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5520, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5737, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5760, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5977, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6000, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6217, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6240, 'track': 1, 'channel': 0, 'note': 67, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6457, 'track': 1, 'channel': 0, 'note': 67, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6480, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6697, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6720, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6937, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6960, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7177, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7200, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7417, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7440, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7657, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7680, 'track': 1, 'channel': 0, 'note': 67, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8114, 'track': 1, 'channel': 0, 'note': 67, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8160, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8594, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8640, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9074, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9600, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 526}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9817, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9840, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10057, 'track': 1, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10080, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10297, 'track': 1, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10320, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10537, 'track': 1, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10560, 'track': 1, 'channel': 0, 'note': 60, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10994, 'track': 1, 'channel': 0, 'note': 60, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track2', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:106> cur_channel=1
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'program_change', 'time': 0, 'program': 0, 'channel': 1}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 0, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 0, 'track': 2, 'channel': 1, 'note': 67, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 0, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 434, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 434, 'track': 2, 'channel': 1, 'note': 67, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 434, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 480, 'track': 2, 'channel': 1, 'note': 65, 'velocity': 100, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 480, 'track': 2, 'channel': 1, 'note': 50, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 480, 'track': 2, 'channel': 1, 'note': 59, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 914, 'track': 2, 'channel': 1, 'note': 65, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 914, 'track': 2, 'channel': 1, 'note': 50, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 914, 'track': 2, 'channel': 1, 'note': 59, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 960, 'track': 2, 'channel': 1, 'note': 60, 'velocity': 100, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 960, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 960, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1394, 'track': 2, 'channel': 1, 'note': 60, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1394, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1394, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1920, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 526}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1920, 'track': 2, 'channel': 1, 'note': 41, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2160, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 240}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2160, 'track': 2, 'channel': 1, 'note': 59, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2354, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2354, 'track': 2, 'channel': 1, 'note': 41, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2377, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2377, 'track': 2, 'channel': 1, 'note': 59, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2400, 'track': 2, 'channel': 1, 'note': 53, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2400, 'track': 2, 'channel': 1, 'note': 43, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2640, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 240}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2640, 'track': 2, 'channel': 1, 'note': 59, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2834, 'track': 2, 'channel': 1, 'note': 53, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2834, 'track': 2, 'channel': 1, 'note': 43, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2857, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2857, 'track': 2, 'channel': 1, 'note': 59, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2880, 'track': 2, 'channel': 1, 'note': 60, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2880, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2880, 'track': 2, 'channel': 1, 'note': 52, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3097, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3097, 'track': 2, 'channel': 1, 'note': 52, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3120, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3314, 'track': 2, 'channel': 1, 'note': 60, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3337, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3360, 'track': 2, 'channel': 1, 'note': 52, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3577, 'track': 2, 'channel': 1, 'note': 52, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3600, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3817, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3840, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3840, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3840, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4057, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4057, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4057, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4080, 'track': 2, 'channel': 1, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4297, 'track': 2, 'channel': 1, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4320, 'track': 2, 'channel': 1, 'note': 67, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4320, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4320, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4537, 'track': 2, 'channel': 1, 'note': 67, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4537, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4537, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4560, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4777, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4800, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 4800, 'track': 2, 'channel': 1, 'note': 53, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5017, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5017, 'track': 2, 'channel': 1, 'note': 53, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5040, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5257, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5280, 'track': 2, 'channel': 1, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5280, 'track': 2, 'channel': 1, 'note': 53, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5280, 'track': 2, 'channel': 1, 'note': 50, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5497, 'track': 2, 'channel': 1, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5497, 'track': 2, 'channel': 1, 'note': 53, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5497, 'track': 2, 'channel': 1, 'note': 50, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5520, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5737, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5760, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5760, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5760, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5977, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5977, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 5977, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6000, 'track': 2, 'channel': 1, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6217, 'track': 2, 'channel': 1, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6240, 'track': 2, 'channel': 1, 'note': 67, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6240, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6240, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6457, 'track': 2, 'channel': 1, 'note': 67, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6457, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6457, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6480, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6697, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6720, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6720, 'track': 2, 'channel': 1, 'note': 53, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6937, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6937, 'track': 2, 'channel': 1, 'note': 53, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 6960, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7177, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7200, 'track': 2, 'channel': 1, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7200, 'track': 2, 'channel': 1, 'note': 53, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7200, 'track': 2, 'channel': 1, 'note': 50, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7417, 'track': 2, 'channel': 1, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7417, 'track': 2, 'channel': 1, 'note': 53, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7417, 'track': 2, 'channel': 1, 'note': 50, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7440, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7657, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7680, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7680, 'track': 2, 'channel': 1, 'note': 67, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7680, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8114, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8114, 'track': 2, 'channel': 1, 'note': 67, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8114, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8160, 'track': 2, 'channel': 1, 'note': 65, 'velocity': 100, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8160, 'track': 2, 'channel': 1, 'note': 50, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8160, 'track': 2, 'channel': 1, 'note': 59, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8594, 'track': 2, 'channel': 1, 'note': 65, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8594, 'track': 2, 'channel': 1, 'note': 50, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8594, 'track': 2, 'channel': 1, 'note': 59, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8640, 'track': 2, 'channel': 1, 'note': 60, 'velocity': 100, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8640, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8640, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9074, 'track': 2, 'channel': 1, 'note': 60, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9074, 'track': 2, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9074, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9600, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 526}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9600, 'track': 2, 'channel': 1, 'note': 41, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9840, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 240}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9840, 'track': 2, 'channel': 1, 'note': 59, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10034, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10034, 'track': 2, 'channel': 1, 'note': 41, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10057, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10057, 'track': 2, 'channel': 1, 'note': 59, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10080, 'track': 2, 'channel': 1, 'note': 53, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10080, 'track': 2, 'channel': 1, 'note': 43, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10320, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 240}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10320, 'track': 2, 'channel': 1, 'note': 59, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10514, 'track': 2, 'channel': 1, 'note': 53, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10514, 'track': 2, 'channel': 1, 'note': 43, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10537, 'track': 2, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10537, 'track': 2, 'channel': 1, 'note': 59, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10560, 'track': 2, 'channel': 1, 'note': 60, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10560, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10560, 'track': 2, 'channel': 1, 'note': 52, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10560, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10994, 'track': 2, 'channel': 1, 'note': 60, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10994, 'track': 2, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10994, 'track': 2, 'channel': 1, 'note': 52, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10994, 'track': 2, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 11040, 'track': 2, 'channel': 1, 'note': 36, 'velocity': 100, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 11474, 'track': 2, 'channel': 1, 'note': 36, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track3', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:106> cur_channel=2
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 0, 'track': 3, 'channel': 2, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 217, 'track': 3, 'channel': 2, 'note': 48, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 240, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 457, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 480, 'track': 3, 'channel': 2, 'note': 48, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 697, 'track': 3, 'channel': 2, 'note': 48, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 720, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 937, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 960, 'track': 3, 'channel': 2, 'note': 48, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1177, 'track': 3, 'channel': 2, 'note': 48, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1200, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1417, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1440, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1657, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7680, 'track': 3, 'channel': 2, 'note': 48, 'velocity': 100, 'time': 6023}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7897, 'track': 3, 'channel': 2, 'note': 48, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7920, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8137, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8160, 'track': 3, 'channel': 2, 'note': 48, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8377, 'track': 3, 'channel': 2, 'note': 48, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8400, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8617, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8640, 'track': 3, 'channel': 2, 'note': 48, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8857, 'track': 3, 'channel': 2, 'note': 48, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8880, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9097, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9120, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9337, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9360, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9577, 'track': 3, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track4', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track5', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track6', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track7', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track8', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track9', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track10', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:106> cur_channel=9
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 0, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 0, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 434, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 404}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 434, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 480, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 480, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 914, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 914, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 960, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 960, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1394, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1394, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1920, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 526}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 1920, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2354, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2354, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2400, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2400, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2834, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2834, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2880, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 2880, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3314, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 3314, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7680, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 4366}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 7680, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8114, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8114, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8160, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8160, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8594, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8594, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8640, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 8640, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9074, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9074, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9120, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9554, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9600, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 9600, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10034, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10034, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10080, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10080, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10514, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10514, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10560, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10560, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10994, 'track': 10, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:127> data_ent={'abs_time': 10994, 'track': 10, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track11', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track12', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track13', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track14', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track15', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track16', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track17', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track18', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track19', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track20', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track21', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track22', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track23', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track24', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track25', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track26', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track27', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track28', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track29', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track30', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track31', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track32', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track33', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track34', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track35', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track36', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track37', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track38', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track39', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track40', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track41', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track42', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track43', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track44', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track45', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track46', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track47', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:141> abs_time=0, msg={'type': 'track_name', 'name': 'Track48', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': '\x82Ô\x82ñ\x82Ô\x82ñ\x82Ô\x82ñ', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'time_signature', 'numerator': 2, 'denominator': 4, 'clocks_per_click': 24, 'notated_32nd_notes_per_beat': 8, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track1', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 0, 4, 127, 61)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 0, 4, 127, 61)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 1, 48, 3, 3, 0, 110, 50, 105)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 1, 48, 3, 3, 0, 110, 50, 105)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 0, 4, 127, 61)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 0, 4, 127, 61)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 1, 48, 3, 3, 0, 110, 50, 105)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'sysex', 'time': 0, 'data': (65, 16, 66, 18, 64, 1, 48, 3, 3, 0, 110, 50, 105)}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'program_change', 'time': 0, 'channel': 0, 'program': 16}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 0, 'channel': 0, 'note': 67, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track2', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'program_change', 'time': 0, 'channel': 1, 'program': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 0, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 0, 'channel': 1, 'note': 67, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 0, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track3', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 0, 'channel': 2, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track4', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track5', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track6', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track7', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track8', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track9', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track10', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 0, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 0, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track11', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track12', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track13', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track14', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track15', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track16', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track17', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track18', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track19', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track20', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track21', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track22', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track23', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track24', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track25', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track26', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track27', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track28', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track29', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track30', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track31', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track32', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track33', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track34', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track35', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track36', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track37', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track38', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track39', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track40', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track41', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track42', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track43', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track44', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track45', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track46', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track47', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=0, msg={'type': 'track_name', 'name': 'Track48', 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 217, 'channel': 2, 'note': 48, 'velocity': 0, 'time': 187}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 240, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 434, 'channel': 0, 'note': 67, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 434, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 434, 'channel': 1, 'note': 67, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 434, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 434, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 434, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 457, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:175> abs_time=480, msg={'type': 'program_change', 'time': 0, 'channel': 0, 'program': 32}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 480, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 480, 'channel': 1, 'note': 65, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 480, 'channel': 1, 'note': 50, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 480, 'channel': 1, 'note': 59, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 480, 'channel': 2, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 480, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 480, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 697, 'channel': 2, 'note': 48, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 720, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 914, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 914, 'channel': 1, 'note': 65, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 914, 'channel': 1, 'note': 50, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 914, 'channel': 1, 'note': 59, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 914, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 914, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 937, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 960, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 960, 'channel': 1, 'note': 60, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 960, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 960, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 960, 'channel': 2, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 960, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 960, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1177, 'channel': 2, 'note': 48, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1200, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1394, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1394, 'channel': 1, 'note': 60, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1394, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1394, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1394, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1394, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1417, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1440, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1657, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1920, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 263}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1920, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1920, 'channel': 1, 'note': 41, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1920, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 1920, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2137, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2160, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2160, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2160, 'channel': 1, 'note': 59, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2354, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2354, 'channel': 1, 'note': 41, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2354, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2354, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2377, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2377, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2377, 'channel': 1, 'note': 59, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2400, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2400, 'channel': 1, 'note': 53, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2400, 'channel': 1, 'note': 43, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2400, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2400, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2617, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2640, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2640, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2640, 'channel': 1, 'note': 59, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2834, 'channel': 1, 'note': 53, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2834, 'channel': 1, 'note': 43, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2834, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2834, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2857, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2857, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2857, 'channel': 1, 'note': 59, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2880, 'channel': 0, 'note': 60, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2880, 'channel': 1, 'note': 60, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2880, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2880, 'channel': 1, 'note': 52, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2880, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 2880, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3097, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3097, 'channel': 1, 'note': 52, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3120, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3314, 'channel': 0, 'note': 60, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3314, 'channel': 1, 'note': 60, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3314, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3314, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3337, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3360, 'channel': 1, 'note': 52, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3577, 'channel': 1, 'note': 52, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3600, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3817, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3840, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3840, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3840, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 3840, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4057, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4057, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4057, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4057, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4080, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4080, 'channel': 1, 'note': 65, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4297, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4297, 'channel': 1, 'note': 65, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4320, 'channel': 0, 'note': 67, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4320, 'channel': 1, 'note': 67, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4320, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4320, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4537, 'channel': 0, 'note': 67, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4537, 'channel': 1, 'note': 67, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4537, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4537, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4560, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4560, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4777, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4777, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4800, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4800, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 4800, 'channel': 1, 'note': 53, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5017, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5017, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5017, 'channel': 1, 'note': 53, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5040, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5040, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5257, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5257, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5280, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5280, 'channel': 1, 'note': 65, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5280, 'channel': 1, 'note': 53, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5280, 'channel': 1, 'note': 50, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5497, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5497, 'channel': 1, 'note': 65, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5497, 'channel': 1, 'note': 53, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5497, 'channel': 1, 'note': 50, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5520, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5520, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5737, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5737, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5760, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5760, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5760, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5760, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5977, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5977, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5977, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 5977, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6000, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6000, 'channel': 1, 'note': 65, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6217, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6217, 'channel': 1, 'note': 65, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6240, 'channel': 0, 'note': 67, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6240, 'channel': 1, 'note': 67, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6240, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6240, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6457, 'channel': 0, 'note': 67, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6457, 'channel': 1, 'note': 67, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6457, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6457, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6480, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6480, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6697, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6697, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6720, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6720, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6720, 'channel': 1, 'note': 53, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6937, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6937, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6937, 'channel': 1, 'note': 53, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6960, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 6960, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7177, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7177, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7200, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7200, 'channel': 1, 'note': 65, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7200, 'channel': 1, 'note': 53, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7200, 'channel': 1, 'note': 50, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7417, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7417, 'channel': 1, 'note': 65, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7417, 'channel': 1, 'note': 53, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7417, 'channel': 1, 'note': 50, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7440, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7440, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7657, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7657, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7680, 'channel': 0, 'note': 67, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7680, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7680, 'channel': 1, 'note': 67, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7680, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7680, 'channel': 2, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7680, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7680, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7897, 'channel': 2, 'note': 48, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 7920, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8114, 'channel': 0, 'note': 67, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8114, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8114, 'channel': 1, 'note': 67, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8114, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8114, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8114, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8137, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8160, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8160, 'channel': 1, 'note': 65, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8160, 'channel': 1, 'note': 50, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8160, 'channel': 1, 'note': 59, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8160, 'channel': 2, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8160, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8160, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8377, 'channel': 2, 'note': 48, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8400, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8594, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8594, 'channel': 1, 'note': 65, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8594, 'channel': 1, 'note': 50, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8594, 'channel': 1, 'note': 59, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8594, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8594, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8617, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8640, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8640, 'channel': 1, 'note': 60, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8640, 'channel': 1, 'note': 64, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8640, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8640, 'channel': 2, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8640, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8640, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8857, 'channel': 2, 'note': 48, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 8880, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9074, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9074, 'channel': 1, 'note': 60, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9074, 'channel': 1, 'note': 64, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9074, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9074, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9074, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9097, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9120, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9120, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9337, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9360, 'channel': 2, 'note': 55, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9554, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9577, 'channel': 2, 'note': 55, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9600, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9600, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9600, 'channel': 1, 'note': 41, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9600, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9600, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9817, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9840, 'channel': 0, 'note': 64, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9840, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 9840, 'channel': 1, 'note': 59, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10034, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10034, 'channel': 1, 'note': 41, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10034, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10034, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10057, 'channel': 0, 'note': 64, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10057, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10057, 'channel': 1, 'note': 59, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10080, 'channel': 0, 'note': 65, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10080, 'channel': 1, 'note': 53, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10080, 'channel': 1, 'note': 43, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10080, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10080, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10297, 'channel': 0, 'note': 65, 'velocity': 0, 'time': 217}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10320, 'channel': 0, 'note': 62, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10320, 'channel': 1, 'note': 62, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10320, 'channel': 1, 'note': 59, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10514, 'channel': 1, 'note': 53, 'velocity': 0, 'time': 194}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10514, 'channel': 1, 'note': 43, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10514, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10514, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10537, 'channel': 0, 'note': 62, 'velocity': 0, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10537, 'channel': 1, 'note': 62, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10537, 'channel': 1, 'note': 59, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10560, 'channel': 0, 'note': 60, 'velocity': 100, 'time': 23}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10560, 'channel': 1, 'note': 60, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10560, 'channel': 1, 'note': 55, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10560, 'channel': 1, 'note': 52, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10560, 'channel': 1, 'note': 48, 'velocity': 100, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10560, 'channel': 9, 'note': 36, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10560, 'channel': 9, 'note': 39, 'velocity': 90, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10994, 'channel': 0, 'note': 60, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10994, 'channel': 1, 'note': 60, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10994, 'channel': 1, 'note': 55, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10994, 'channel': 1, 'note': 52, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10994, 'channel': 1, 'note': 48, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10994, 'channel': 9, 'note': 36, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 10994, 'channel': 9, 'note': 39, 'velocity': 0, 'time': 0}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 11040, 'channel': 1, 'note': 36, 'velocity': 100, 'time': 46}
+19:53:39 DEBUG MidiParser.py.MidiParser.parse0:161> data_ent={'abs_time': 11474, 'channel': 1, 'note': 36, 'velocity': 0, 'time': 434}
+19:53:39 DEBUG MidiParser.py.SampleApp.main:350> done
+19:53:39 DEBUG MidiParser.py.__main__.main:386> finally
+19:53:39 DEBUG MidiParser.py.SampleApp.end:355> doing ..
+19:53:39 DEBUG MidiParser.py.SampleApp.end:356> done
