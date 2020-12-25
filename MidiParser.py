@@ -24,17 +24,47 @@ __author__ = 'Yoichi Tanibayashi'
 __date__   = '2020'
 
 import mido
-import json
-import operator
 import copy
 from MyLogger import get_logger
+
+
+class MidiDataEnt:
+    """
+    Attributes
+    ----------
+    abs_time: float
+        sec > 0
+    channel: int
+        0 .. 15
+    note: int
+        0 .. 127
+    velocity: int
+        0 .. 127
+    """
+    __log = get_logger(__name__, False)
+
+    def __init__(self, abs_time=None, channel=None, note=None,
+                 velocity=None, debug=False):
+        self._dbg = debug
+        __class__.__log = get_logger(__class__.__name__, self._dbg)
+        self.__log.debug('time,ch,note,velo=%s',
+                         (abs_time, channel, note, velocity))
+
+        self.abs_time = abs_time
+        self.channel = channel
+        self.note = note
+        self.velocity = velocity
+
+    def __str__(self):
+        return '%08.3f, ch:%02d, note:%03d, velocity:%03d' % (
+            self.abs_time, self.channel, self.note, self.velocity)
 
 
 class MidiParser:
     """
     MIDI parser for Music Box
 
-    * トラック/チャンネルを選択することができる。
+    * チャンネルを選択することができる。
 
 
     Simple Usage
@@ -50,12 +80,6 @@ class MidiParser:
     """
     NOTE_N = 128
     DEF_NOTE_BASE = 60
-
-    CHR_ON = ' '
-    CHR_OFF = '*'
-
-    CHR_NOW_ON = 'o'
-    CHR_NOW_OFF = '='
 
     __log = get_logger(__name__, False)
 
@@ -75,34 +99,27 @@ class MidiParser:
 
         self._midi = mido.MidiFile(self._midi_file)
 
-        self._tpb =  self._midi.ticks_per_beat
+        self._tpb = self._midi.ticks_per_beat
         self._channel_list = []
 
-    def parse1(self, midi_data):
+    def parse1(self, midi_file_obj):
         """
         parse MIDI format simply for subsequent parsing step
 
         Parameters
         ----------
-        midi_data:
-            MIDI data
+        midi_file_obj:
+            MIDI file obj
 
         Returns
         -------
-        data: list of data_ent
-            data_ent_ex = {
-              'abs_data': 930,
-              'midi_channecl': 5,
-              'note': 65,
-              'time': 300
-            }
-
+        data: list of MidiDataEnt
         """
-        self.__log.debug('midi_data=%s', midi_data.__dict__)
+        self.__log.debug('midi_file_obj=%s', midi_file_obj.__dict__)
 
         out_data = []
 
-        merged_tracks=mido.merge_tracks(midi_data.tracks)
+        merged_tracks = mido.merge_tracks(midi_file_obj.tracks)
         abs_time = 0
         self._channel_list = []
         cur_tempo = None
@@ -126,24 +143,13 @@ class MidiParser:
                 continue
 
             if msg.type == 'note_off':
-                data_ent = {
-                    'abs_time': abs_time,
-                    'channel': msg.channel,
-                    'note': msg.note,
-                    'velocity': 0,
-                    'delta': delta_sec
-                }
+                data_ent = MidiDataEnt(abs_time, msg.channel, msg.note, 0)
                 out_data.append(data_ent)
                 self._channel_list.append(msg.channel)
 
             if msg.type == 'note_on':
-                data_ent = {
-                    'abs_time': abs_time,
-                    'channel': msg.channel,
-                    'note': msg.note,
-                    'velocity': msg.velocity,
-                    'delta': delta_sec
-                }
+                data_ent = MidiDataEnt(abs_time, msg.channel, msg.note,
+                                       msg.velocity)
                 out_data.append(data_ent)
                 self._channel_list.append(msg.channel)
 
@@ -175,32 +181,10 @@ class MidiParser:
 
         out_data = []
         for d in in_data:
-            if d['channel'] in channel:
+            if d.channel in channel:
                 out_data.append(d)
 
         return out_data
-
-    def parse2(self, in_data):
-        """
-        """
-        n_list = {}
-        prev_n_list = [self.CHR_OFF] * self.NOTE_N
-        for d in in_data:
-            abs_time = d['abs_time']
-            note = d['note']
-            velocity = d['velocity']
-
-            if abs_time not in n_list.keys():
-                n_list[abs_time] = copy.deepcopy(prev_n_list)
-
-            if velocity > 0:
-                n_list[abs_time][note] = self.CHR_NOW_ON
-                prev_n_list[note] = self.CHR_ON
-            else:
-                n_list[abs_time][note] = self.CHR_NOW_OFF
-                prev_n_list[note] = self.CHR_OFF
-
-        return n_list
 
     def parse(self, channel=None):
         """
@@ -213,48 +197,25 @@ class MidiParser:
 
         Returns
         -------
-        midi_data: list of midi_ent
-
+        midi_data: list of MidiDataEnt
         """
         self.__log.debug('channel=%s', channel)
 
         data1 = self.parse1(self._midi)
 
-        for d in data1:
-            msg = '%08.3f' % d['abs_time']
-            msg += ',ch:%02d' % d['channel']
-            msg += ',note:%03d' % d['note']
-            msg += ',velocity:%03d' % d['velocity']
-            msg += ',delta:%06.3f' % d['delta']
-            self.__log.debug(msg)
+        if self._dbg:
+            self.__log.debug('data1=')
+            for d in data1:
+                print(d)
 
         data1a = self.select_channel(data1, channel)
 
-        data2 = self.parse2(data1a)
+        if self._dbg:
+            self.__log.debug('data1a=')
+            for d in data1a:
+                print(d)
 
-        return data2
-
-
-    def print_data2(self, data2):
-        """
-        """
-        print('           ', end='')
-        for i in range(self.NOTE_N):
-            print('%d' % ((i/100) % 10), end='')
-        print()
-
-        print('           ', end='')
-        for i in range(self.NOTE_N):
-            print('%d' % ((i/10) % 10), end='')
-        print()
-
-        print('           ', end='')
-        for i in range(self.NOTE_N):
-            print('%d' % (i % 10), end='')
-        print()
-
-        for t in data2.keys():
-            print('%08.3f, %a' % (t, ''.join(data2[t])))
+        return data1a
 
 
 # --- 以下、サンプル ---
@@ -262,9 +223,6 @@ class MidiParser:
 
 class SampleApp:
     """ Sample application class
-
-    Attributes
-    ----------
     """
     __log = get_logger(__name__, False)
 
@@ -303,7 +261,8 @@ class SampleApp:
         self.__log.debug('')
 
         midi_data = self._parser.parse(self._channel)
-        self._parser.print_data2(midi_data)
+        for d in midi_data:
+            print(d)
 
         self.__log.debug('channel_list=%s', self._parser._channel_list)
 
