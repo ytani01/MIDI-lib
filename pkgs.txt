@@ -1,1 +1,2 @@
 libsdl2-mixer-dev
+libportaudio2
