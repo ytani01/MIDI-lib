@@ -101,12 +101,13 @@ class Wav:
 # --- 以下、サンプル ---
 
 
+import MidiUtil
+
+
 class SampleApp:
     """Sample application class
-
-    Attributes
-    ----------
     """
+
     __log = get_logger(__name__, False)
 
     def __init__(self, freq, outfile, vol, sec, rate, debug=False):
