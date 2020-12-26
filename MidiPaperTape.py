@@ -24,7 +24,7 @@ __author__ = 'Yoichi Tanibayashi'
 __date__   = '2020'
 
 import copy
-from MidiParser import MidiParser
+from MidiUtil import Parser
 from MyLogger import get_logger
 
 
@@ -89,7 +89,7 @@ class MidiPaperTape:
                 print(d)
 
         ch_data = {}
-        prev_ch_data = [self.CHR_OFF] * MidiParser.NOTE_N
+        prev_ch_data = [self.CHR_OFF] * Parser.NOTE_N
 
         for d in midi_data:
             if d.abs_time not in ch_data.keys():
@@ -117,24 +117,24 @@ class MidiPaperTape:
     def print(self):
         """
         """
-        print('-' * (8 + 3 + MidiParser.NOTE_N + 1))
+        print('-' * (8 + 3 + Parser.NOTE_N + 1))
 
         print('         | ', end='')
-        for i in range(MidiParser.NOTE_N):
+        for i in range(Parser.NOTE_N):
             print('%d' % ((i/100) % 10), end='')
         print()
 
         print('         | ', end='')
-        for i in range(MidiParser.NOTE_N):
+        for i in range(Parser.NOTE_N):
             print('%d' % ((i/10) % 10), end='')
         print()
 
         print('         | ', end='')
-        for i in range(MidiParser.NOTE_N):
+        for i in range(Parser.NOTE_N):
             print('%d' % (i % 10), end='')
         print()
 
-        print('-' * (8 + 3 + MidiParser.NOTE_N + 1))
+        print('-' * (8 + 3 + Parser.NOTE_N + 1))
 
         for t in sorted(self._data.keys()):
             print('%08.3f, %a' % (t, ''.join(self._data[t])))
@@ -175,7 +175,7 @@ class SampleApp:
 
         self._channel = channel
 
-        self._parser = MidiParser(self._midi_file, debug=self._dbg)
+        self._parser = Parser(self._midi_file, debug=self._dbg)
 
     def main(self):
         """ main routine

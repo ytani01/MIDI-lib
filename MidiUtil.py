@@ -7,17 +7,17 @@ MIDI parser for
 
 ### for detail and simple usage
 
-$ python3 -m pydoc MidiParser.MidiParser
+$ python3 -m pydoc MidiUtil
 
 
 ### API
 
-see comment of ``MidiParser`` class
+see comment of ``MidiUtil`` class
 
 
 ### sample program
 
-$ ./MidiParser.py file.mid
+$ ./MidiUtil.py file.mid
 
 """
 __author__ = 'Yoichi Tanibayashi'
@@ -28,8 +28,47 @@ import copy
 from MyLogger import get_logger
 
 
-class MidiDataEnt:
+__log = get_logger(__name__, False)
+
+
+class Util:
     """
+    MIDI Utilties
+    """
+    __log = get_logger(__name__, True)
+
+    FREQ_BASE = 440
+    NOTE_BASE = 69
+
+    NOTE_MIN = 41   # ?
+    NOTE_MAX = 112  # ?
+
+    def __init__(self, debug=False):
+        self._dbg = debug
+        self.__log = get_logger(__class__.__name__, self._dbg)
+
+    def note2freq(self, note):
+        """
+        MIDI note number to frequency
+
+        Parameters
+        ----------
+        note: int
+
+        Returns
+        -------
+        freq: float
+        """
+        self.__log.debug('note=%s', note)
+
+        freq = self.FREQ_BASE * 2.0 ** (float(note - self.NOTE_BASE)/12.0)
+        return freq
+
+
+class DataEnt:
+    """
+    MIDI data entry
+
     Attributes
     ----------
     abs_time: float
@@ -41,12 +80,12 @@ class MidiDataEnt:
     velocity: int
         0 .. 127
     """
-    __log = get_logger(__name__, False)
+    __log = get_logger(__name__, True)
 
     def __init__(self, abs_time=None, channel=None, note=None,
                  velocity=None, debug=False):
         self._dbg = debug
-        __class__.__log = get_logger(__class__.__name__, self._dbg)
+        self.__log = get_logger(__class__.__name__, self._dbg)
         self.__log.debug('time,ch,note,velo=%s',
                          (abs_time, channel, note, velocity))
 
@@ -60,7 +99,7 @@ class MidiDataEnt:
             self.abs_time, self.channel, self.note, self.velocity)
 
 
-class MidiParser:
+class Parser:
     """
     MIDI parser for Music Box
 
@@ -70,9 +109,9 @@ class MidiParser:
     Simple Usage
     ------------
     ============================================================
-    from MidiParser import MidiParser
+    import MidiUtil
 
-    parser = MidiParser(midi_file)
+    parser = MidiUtil.Parser(midi_file)
 
     midi_data = parser.parse()
     ============================================================
@@ -92,7 +131,7 @@ class MidiParser:
             file name of MIDI file
         """
         self._dbg = debug
-        __class__.__log = get_logger(__class__.__name__, self._dbg)
+        self.__log = get_logger(__class__.__name__, self._dbg)
         self.__log.debug('midi_file=%s', midi_file)
 
         self._midi_file = midi_file
@@ -113,7 +152,7 @@ class MidiParser:
 
         Returns
         -------
-        data: list of MidiDataEnt
+        data: list of DataEnt
         """
         self.__log.debug('midi_file_obj=%s', midi_file_obj.__dict__)
 
@@ -143,13 +182,14 @@ class MidiParser:
                 continue
 
             if msg.type == 'note_off':
-                data_ent = MidiDataEnt(abs_time, msg.channel, msg.note, 0)
+                data_ent = DataEnt(abs_time, msg.channel, msg.note, 0,
+                                   debug=self._dbg)
                 out_data.append(data_ent)
                 self._channel_list.append(msg.channel)
 
             if msg.type == 'note_on':
-                data_ent = MidiDataEnt(abs_time, msg.channel, msg.note,
-                                       msg.velocity)
+                data_ent = DataEnt(abs_time, msg.channel, msg.note,
+                                   msg.velocity, debug=self._dbg)
                 out_data.append(data_ent)
                 self._channel_list.append(msg.channel)
 
@@ -197,7 +237,7 @@ class MidiParser:
 
         Returns
         -------
-        midi_data: list of MidiDataEnt
+        midi_data: list of DataEnt
         """
         self.__log.debug('channel=%s', channel)
 
@@ -227,7 +267,7 @@ class SampleApp:
     __log = get_logger(__name__, False)
 
     def __init__(self, midi_file, out_file, channel=[], debug=False):
-        """constructor
+        """ Constructor
 
         Parameters
         ----------
@@ -253,7 +293,7 @@ class SampleApp:
 
         self._channel = channel
 
-        self._parser = MidiParser(self._midi_file, debug=self._dbg)
+        self._parser = Parser(self._midi_file, debug=self._dbg)
 
     def main(self):
         """ main routine
@@ -284,7 +324,7 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 
 @click.command(context_settings=CONTEXT_SETTINGS, help='''
-MidiParser sample program
+MidiUtil sample program
 ''')
 @click.argument('midi_file', type=click.Path(exists=True))
 @click.argument('out_file', type=str, nargs=-1)

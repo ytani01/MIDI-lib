@@ -29,4 +29,4 @@ $ ./MidiPaperTape.py midi_file
 
 ## B. Misc
 
-![](docs/media/mido_play.mp4)
+![](docs/mido_play.mp4)
