@@ -154,7 +154,7 @@ class SampleApp:
 
             print('channel:%s note:%s, velocity:%s' % (
                 m.channel, m.note, m.velocity))
-            self._snd[m.note].play()
+            self._snd[m.note].play(fade_ms=100)
 
         self.__log.debug('done')
 
