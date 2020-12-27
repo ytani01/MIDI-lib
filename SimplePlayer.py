@@ -35,9 +35,9 @@ class Wav:
         description
     """
     DEF_SEC = 0.5  # sec
-    DEF_RATE = 12800  # Hz
+    DEF_RATE = 44100  # Hz
     VOL_MAX = 60000
-    DEF_VOL = 5000
+    DEF_VOL = 3000
 
     __log = get_logger(__name__, False)
 
@@ -133,7 +133,9 @@ class SampleApp:
 
     def load_wav(self):
         glob_pattern = "note_wav/*.wav"
+#        glob_pattern = "../MusicBox/wav/3*.wav"
         wav_files = sorted(glob.glob(glob_pattern))
+        print(len(wav_files))
         return [pygame.mixer.Sound(f) for f in wav_files]
 
     def main(self):
