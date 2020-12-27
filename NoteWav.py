@@ -54,7 +54,7 @@ class SampleApp:
             self.__log.info('fname=%s', fname)
             freq = self._mu.note2freq(note)
             wav = WavUtil.Wav(freq, sec=self._sec, rate=self._rate)
-            wav.save(fname, rate=self._rate)
+            wav.save(fname)
 
         self.__log.debug('done')
 

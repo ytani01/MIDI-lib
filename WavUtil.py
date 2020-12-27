@@ -36,8 +36,9 @@ class Wav:
     """
     DEF_SEC = 0.5  # sec
     DEF_RATE = 12800  # Hz
-    VOL_MAX = 60000
-    DEF_VOL = 5000
+    VOL_MAX = 1.0
+    VOL_MIN = 0.0
+    DEF_VOL = 0.5
 
     __log = get_logger(__name__, False)
 
@@ -51,57 +52,78 @@ class Wav:
         __class__.__log = get_logger(__class__.__name__, self._dbg)
         self.__log.debug('freq,sec,rate=%s', (freq, sec, rate))
 
-        self._wav = self.mk_wav(freq, sec, rate)
+        self._freq = freq
+        self._sec = sec
+        self._rate = rate
 
-    def mk_wav(self, freq, sec=DEF_SEC, rate=DEF_RATE):
+        self._wav = self.mk_wav()
+
+    def mk_wav(self):
         """method1
 
         Parameters
         ----------
         """
-        self.__log.debug('freq,sec,rate=%s', (freq, sec, rate))
+        self.__log.debug('')
 
-        samples = numpy.arange(0, rate * sec)
-        sin_wave1 = numpy.sin(2 * numpy.pi * freq * samples / rate)
-        # 16bit 符号付き整数に変換
-        sin_wave2 = [int(x * 32767.0) for x in sin_wave1]
+        # サンプリングする位置(秒)のarray
+        sample_sec = numpy.arange(self._rate * self._sec) / self._rate
+
+        # -32767 .. 32767 の sin波
+        sin_wave1 = 32767 * numpy.sin(
+            2 * numpy.pi * self._freq * sample_sec)
+
+        # [Important!]
+        #   区切りのいい波長に切り詰め、プツブツ音を回避
+        sin_list1 = list(sin_wave1)
+
+        while sin_list1[-1] < 0:
+            sin_list1.pop()
+
+        while sin_list1[-1] > 0:
+            sin_list1.pop()
+
+        # int16に変換
+        sin_wave2 = numpy.array(sin_list1, dtype=numpy.int16)
 
         return sin_wave2
 
-    def save(self, outfile, rate=DEF_RATE):
+    def save(self, outfile):
         """
         outfile: str
         """
-        self.__log.debug('outfile=%s, rate=%s', outfile, rate)
+        self.__log.debug('outfile=%s', outfile)
 
         w_write = wave.Wave_write(outfile)
         w_write.setparams((
-            1, 2, rate, len(self._wav), 'NONE', 'not compressed'))
+            1, 2, self._rate, len(self._wav), 'NONE', 'not compressed'))
         w_write.writeframes(array.array('h', self._wav).tobytes())
         w_write.close()
 
-    def play(self, vol=DEF_VOL, rate=DEF_RATE, blocking=True):
+    def play(self, vol=DEF_VOL, blocking=True):
         """
         Parameters
         ----------
-        rate: int
+        vol: float
         blocking: bool
         """
-        self.__log.debug('vol=%s, rate=%s, blocking=%s',
-                         vol, rate, blocking)
+        self.__log.debug('vol=%s, blocking=%s', vol, blocking)
 
         if vol > self.VOL_MAX:
             vol = self.VOL_MAX
             self.__log.warning('fix: vol=%s', vol)
-            
-        w_out = [int(x * vol) for x in self._wav]
-        sounddevice.play(w_out, rate, blocking=blocking)
+
+        if vol < self.VOL_MIN:
+            vol = self.VOL_MIN
+            self.__log.warning('fix: vol=%s', vol)
+
+        w_list = [int(x * vol) for x in self._wav]
+        w_out = numpy.array(w_list, dtype=numpy.int16)
+
+        sounddevice.play(w_out, self._rate, blocking=blocking)
 
 
 # --- 以下、サンプル ---
-
-
-import MidiUtil
 
 
 class SampleApp:
@@ -135,10 +157,10 @@ class SampleApp:
         wav = Wav(self._freq, self._sec, self._rate,
                   debug=self._dbg)
 
-        wav.play(self._vol, rate=self._rate)
+        wav.play(self._vol)
 
         if len(self._outfile) > 0:
-            wav.save(self._outfile[0], self._rate)
+            wav.save(self._outfile[0])
 
         self.__log.debug('done')
 
