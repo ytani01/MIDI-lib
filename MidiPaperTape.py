@@ -88,21 +88,50 @@ class MidiPaperTape:
             for d in midi_data:
                 print(d)
 
+        note_min = Parser.NOTE_N - 1
+        note_max = 0
+
         ch_data = {}
+        on_count = [0] * Parser.NOTE_N
         prev_ch_data = [self.CHR_OFF] * Parser.NOTE_N
 
         for d in midi_data:
             if d.abs_time not in ch_data.keys():
                 ch_data[d.abs_time] = copy.deepcopy(prev_ch_data)
 
+            if d.note < note_min:
+                note_min = d.note
+
+            if d.note > note_max:
+                note_max = d.note
+
             if d.velocity > 0:
-                ch_data[d.abs_time][d.note] = self.CHR_NOW_ON
+                channel_ch = 'abcdefghijklmnopqrstuvwxyz'[d.channel]
+                ch_data[d.abs_time][d.note] = channel_ch
+
+                on_count[d.note] += 1
                 prev_ch_data[d.note] = self.CHR_ON
             else:
-                ch_data[d.abs_time][d.note] = self.CHR_NOW_OFF
-                prev_ch_data[d.note] = self.CHR_OFF
+                channel_ch = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[d.channel]
+                ch_data[d.abs_time][d.note] = channel_ch
 
-        return ch_data
+                on_count[d.note] -= 1
+                if on_count[d.note] <= 0:
+                    prev_ch_data[d.note] = self.CHR_OFF
+
+        self.__log.debug('note_min=%s, note_max=%s',
+                         note_min, note_max)
+        self.__log.debug('on_count=%s', on_count)
+
+        for k in sorted(ch_data.keys()):
+            ch_data[k] = ch_data[k][note_min:note_max+1]
+
+        out_data = {
+            'note_min': note_min,
+            'note_max': note_max,
+            'ch_data': ch_data
+        }
+        return out_data
 
     def get(self, abs_time):
         """
@@ -117,27 +146,30 @@ class MidiPaperTape:
     def print(self):
         """
         """
-        print('-' * (8 + 3 + Parser.NOTE_N + 1))
+        n_range = range(self._data['note_min'], self._data['note_max']+1)
 
-        print('         | ', end='')
-        for i in range(Parser.NOTE_N):
+        print('-' * (8 + 2 + len(n_range)))
+
+        print('        |', end='')
+        for i in n_range:
             print('%d' % ((i/100) % 10), end='')
-        print()
+        print('|')
 
-        print('         | ', end='')
-        for i in range(Parser.NOTE_N):
+        print('        |', end='')
+        for i in n_range:
             print('%d' % ((i/10) % 10), end='')
-        print()
+        print('|')
 
-        print('         | ', end='')
-        for i in range(Parser.NOTE_N):
+        print('        |', end='')
+        for i in n_range:
             print('%d' % (i % 10), end='')
-        print()
+        print('|')
 
-        print('-' * (8 + 3 + Parser.NOTE_N + 1))
+        print('-' * (8 + 2 + len(n_range)))
 
-        for t in sorted(self._data.keys()):
-            print('%08.3f, %a' % (t, ''.join(self._data[t])))
+        for t in sorted(self._data['ch_data'].keys()):
+            print('%08.3f|%s|' % (
+                t, ''.join(self._data['ch_data'][t])))
 
 
 # --- 以下、サンプル ---
@@ -175,20 +207,22 @@ class SampleApp:
 
         self._channel = channel
 
-        self._parser = Parser(self._midi_file, debug=self._dbg)
+        self._parser = Parser(debug=self._dbg)
 
     def main(self):
         """ main routine
         """
         self.__log.debug('')
 
-        midi_data = self._parser.parse(self._channel)
-        paper_tape = MidiPaperTape(midi_data, debug=self._dbg)
+        parsed_data = self._parser.parse(self._midi_file, self._channel)
+
+        paper_tape = MidiPaperTape(parsed_data['data'], debug=self._dbg)
 
         paper_tape.print()
 
         if self._out_file:
             with open(self._out_file, mode='w') as f:
+                # TBD
                 f.write('a')
 
         self.__log.debug('channel_list=%s', self._parser._channel_list)

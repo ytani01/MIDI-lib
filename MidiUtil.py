@@ -79,11 +79,15 @@ class DataEnt:
         0 .. 127
     velocity: int
         0 .. 127
+    end_time: float
+        sec >= abs_time > 0
+    length: float
+        sec >= 0
     """
     __log = get_logger(__name__, True)
 
     def __init__(self, abs_time=None, channel=None, note=None,
-                 velocity=None, debug=False):
+                 velocity=None, end_time=None, debug=False):
         self._dbg = debug
         self.__log = get_logger(__class__.__name__, self._dbg)
         self.__log.debug('time,ch,note,velo=%s',
@@ -93,10 +97,25 @@ class DataEnt:
         self.channel = channel
         self.note = note
         self.velocity = velocity
+        self.end_time = end_time
+        self.length = 0
 
     def __str__(self):
-        return '%08.3f, ch:%02d, note:%03d, velocity:%03d' % (
-            self.abs_time, self.channel, self.note, self.velocity)
+        """
+        Returns
+        -------
+        str_data: str
+
+        """
+        str_data = '%08.3f:' % self.abs_time
+        str_data += ' channel=%02d, note:%03d, velocity:%03d' % (
+            self.channel, self.note, self.velocity)
+
+        if self.end_time is not None and self.end_time != self.abs_time:
+            str_data += ' ... %08.3f' % (self.end_time)
+            str_data += ' (%.3f sec)' % (self.length)
+
+        return str_data
 
 
 class Parser:
@@ -122,7 +141,7 @@ class Parser:
 
     __log = get_logger(__name__, False)
 
-    def __init__(self, midi_file, debug=False):
+    def __init__(self, debug=False):
         """ Constructor
 
         Parameters
@@ -132,33 +151,30 @@ class Parser:
         """
         self._dbg = debug
         self.__log = get_logger(__class__.__name__, self._dbg)
-        self.__log.debug('midi_file=%s', midi_file)
+        self.__log.debug('')
 
-        self._midi_file = midi_file
+        self._channel_list = None
 
-        self._midi = mido.MidiFile(self._midi_file)
-
-        self._tpb = self._midi.ticks_per_beat
-        self._channel_list = []
-
-    def parse1(self, midi_file_obj):
+    def parse1(self, midi_obj):
         """
         parse MIDI format simply for subsequent parsing step
 
         Parameters
         ----------
-        midi_file_obj:
+        midi_obj:
             MIDI file obj
 
         Returns
         -------
         data: list of DataEnt
+
         """
-        self.__log.debug('midi_file_obj=%s', midi_file_obj.__dict__)
+        self.__log.debug('midi_obj=%s', midi_obj.__dict__)
 
+        merged_tracks = mido.merge_tracks(midi_obj.tracks)
+
+        tpb = midi_obj.ticks_per_beat
         out_data = []
-
-        merged_tracks = mido.merge_tracks(midi_file_obj.tracks)
         abs_time = 0
         self._channel_list = []
         cur_tempo = None
@@ -167,19 +183,19 @@ class Parser:
             delta_sec = 0
             try:
                 if cur_tempo:
-                    delta_sec = mido.tick2second(msg.time, self._tpb,
-                                                 cur_tempo)
+                    delta_sec = mido.tick2second(msg.time, tpb, cur_tempo)
             except KeyError:
                 pass
 
             abs_time += delta_sec
 
-            if msg.type == 'end_of_track':
-                continue
-
             if msg.type == 'set_tempo':
                 cur_tempo = msg.tempo
                 continue
+
+            if msg.type == 'end_of_track':
+                self.__log.debug(msg.__dict__)
+                break
 
             if msg.type == 'note_off':
                 data_ent = DataEnt(abs_time, msg.channel, msg.note, 0,
@@ -210,7 +226,7 @@ class Parser:
 
         Returns
         -------
-        out_data: list of data_ent
+        out_data: list of DataEnt
 
         """
         self.__log.debug('channel=%s', channel)
@@ -226,36 +242,83 @@ class Parser:
 
         return out_data
 
-    def parse(self, channel=None):
+    def set_end_time(self, in_data):
+        """
+        """
+        self.__log.debug('')
+
+        out_data = copy.deepcopy(in_data)
+        note_start = {}
+
+        for i, ent in enumerate(out_data):
+            if ent.velocity > 0:
+                note_start[(ent.channel, ent.note)] = i
+                self.__log.debug('note_start=%s', note_start)
+                continue
+
+            # velocity == 0
+
+            ent.end_time = ent.abs_time
+            ent.length = 0
+
+            try:
+                i2 = note_start[(ent.channel, ent.note)]
+            except KeyError as ex:
+                msg = '%s:%s' % (type(ex).__name__, ex)
+                self.__log.warning(msg)
+                continue
+
+            out_data[i2].end_time = ent.abs_time
+            out_data[i2].length = ent.abs_time - out_data[i2].abs_time
+
+        note_start[(ent.channel, ent.note)] = None
+
+        self.__log.debug('note_start=%s', note_start)
+
+        for k in note_start.keys():
+            if note_start[k] is not None:
+                i2 = note_start[k]
+                out_data[i2].end_time = ent.abs_time
+                out_data[i2].length = ent.abs_time - out_data[i2].abs_time
+                note_start[k] = None
+
+        self.__log.debug('note_start=%s', note_start)
+
+        return out_data
+
+    def parse(self, midi_file, channel=None):
         """
         parse MIDI data
 
         Parameters
         ----------
+        midi_file: str
+            MIDI file name
         channel: list of int or None for all channels
             MIDI channel
 
         Returns
         -------
-        midi_data: list of DataEnt
-        """
-        self.__log.debug('channel=%s', channel)
+        out_data: {'channel_list': list of int, 'data': list of DataEnt}
 
-        data1 = self.parse1(self._midi)
+        """
+        self.__log.debug('midi_file=%s, channel=%s', midi_file, channel)
+
+        midi_obj = mido.MidiFile(midi_file)
+
+        data1 = self.parse1(midi_obj)
 
         if self._dbg:
             self.__log.debug('data1=')
             for d in data1:
                 print(d)
 
-        data1a = self.select_channel(data1, channel)
+        data2 = self.select_channel(data1, channel)
 
-        if self._dbg:
-            self.__log.debug('data1a=')
-            for d in data1a:
-                print(d)
+        data3 = self.set_end_time(data2)
 
-        return data1a
+        out_data = {'channel_list': self._channel_list, 'data': data3}
+        return out_data
 
 
 # --- 以下、サンプル ---
@@ -266,7 +329,8 @@ class SampleApp:
     """
     __log = get_logger(__name__, False)
 
-    def __init__(self, midi_file, out_file, channel=[], debug=False):
+    def __init__(self, midi_file, out_file, channel=[],
+                 note_end_flag=False, debug=False):
         """ Constructor
 
         Parameters
@@ -277,37 +341,54 @@ class SampleApp:
             file name of output file
         channel: list of int
             MIDI channel
+        note_end_flag: bool
+
         """
         self._dbg = debug
         __class__.__log = get_logger(__class__.__name__, self._dbg)
         self.__log.debug('midi_file=%s', midi_file)
         self.__log.debug('out_file=%s', out_file)
         self.__log.debug('channel=%s', channel)
+        self.__log.debug('note_end_flag=%s', note_end_flag)
 
         self._midi_file = midi_file
+        self._channel = channel
+        self._note_end_flag = note_end_flag
 
         if len(out_file) > 0:
             self._out_file = out_file[0]
         else:
             self._out_file = None
 
-        self._channel = channel
-
-        self._parser = Parser(self._midi_file, debug=self._dbg)
+        self._parser = Parser(debug=self._dbg)
 
     def main(self):
         """ main routine
         """
         self.__log.debug('')
 
-        midi_data = self._parser.parse(self._channel)
-        for d in midi_data:
-            print(d)
+        parsed_data = self._parser.parse(self._midi_file, self._channel)
 
-        self.__log.debug('channel_list=%s', self._parser._channel_list)
+        interval = []
+
+        print('parsed data ..')
+        for i, d in enumerate(parsed_data['data']):
+
+            if d.length > 0:
+                interval.append(round(d.length, 2))
+
+            if d.velocity == 0 and self._note_end_flag is False:
+                continue
+
+            print('(%4d) %s' % (i, d))
+
+        print('channel_list=%s' % (parsed_data['channel_list']))
+        interval = sorted(list(set(interval)))
+        print('interval=%s' % (interval))
 
         if self._out_file:
             with open(self._out_file, mode='w') as f:
+                # TBD
                 f.write('a')
 
         self.__log.debug('done')
@@ -330,17 +411,21 @@ MidiUtil sample program
 @click.argument('out_file', type=str, nargs=-1)
 @click.option('--channel', '-c', 'channel', type=int, multiple=True,
               help='MIDI channel')
+@click.option('--note_end', '-e', 'note_end', is_flag=True,
+              default=False,
+              help="print note end flag")
 @click.option('--debug', '-d', 'debug', is_flag=True, default=False,
               help='debug flag')
-def main(midi_file, out_file, channel, debug):
+def main(midi_file, out_file, channel, note_end, debug):
     """サンプル起動用メイン関数
     """
     __log = get_logger(__name__, debug)
     __log.debug('midi_file=%s', midi_file)
     __log.debug('out_file=%s', out_file)
     __log.debug('channel=%s', channel)
+    __log.debug('note_end=%s', note_end)
 
-    app = SampleApp(midi_file, out_file, channel, debug=debug)
+    app = SampleApp(midi_file, out_file, channel, note_end, debug=debug)
     try:
         app.main()
     finally:
