@@ -100,7 +100,7 @@ class Wav:
         w_write.writeframes(array.array('h', self._wav).tobytes())
         w_write.close()
 
-    def play(self, vol=DEF_VOL, blocking=True):
+    def play(self, vol=DEF_VOL, blocking=False):
         """
         Parameters
         ----------

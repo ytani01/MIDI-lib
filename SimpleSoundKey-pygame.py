@@ -26,6 +26,7 @@ from MyLogger import get_logger
 
 
 import time
+import pygame
 import MidiUtil
 import WavUtil
 import CuiUtil
@@ -35,13 +36,16 @@ class SampleApp:
     """Sample application class
     """
     VOLUME_MAX = 1.0
-    VOLUME_MIN = 0.0
+    VOLUME_MIN = 0.05
 
-    DEF_VOLUME = 0.5
+    DEF_VOLUME = 0.2
+
+    NOTE_BASE_MIN = 0
+    NOTE_BASE_MAX = 117
 
     DEF_NOTE_BASE = 69  # C
 
-    DEF_SEC = 0.5  # sec
+    DEF_SEC = 0.15  # sec
 
     DEF_RATE = 44100  # Hz
 
@@ -69,23 +73,97 @@ class SampleApp:
         self._mu = MidiUtil.Util(debug=self._dbg)
 
         self._cui = CuiUtil.CuiKey([
-            CuiUtil.CuiCmd('123456789', self.play),
+            CuiUtil.CuiCmd('12345678', self.play),
+            CuiUtil.CuiCmd(['KEY_UP', 'KEY_DOWN'], self.change_vol),
+            CuiUtil.CuiCmd(['KEY_RIGHT', 'KEY_LEFT'], self.change_sec),
+            CuiUtil.CuiCmd(['KEY_PGUP', 'KEY_PGDOWN'], self.change_note_base),
             CuiUtil.CuiCmd(['q', 'KEY_ESCAPE'], self.quit)
         ], debug=self._dbg)
+
+        pygame.mixer.init(channels=1)
+
+    def change_sec(self, key_sym):
+        """
+        """
+        self.__log.debug('key_sym=%a', key_sym)
+
+        if key_sym == 'KEY_RIGHT':
+            self._sec += 0.05
+
+        if key_sym == 'KEY_LEFT':
+            self._sec -= 0.05
+
+            if self._sec <= 0:
+                self._sec = 0.05
+                self.__log.warning('fix: sec=%s', self._sec)
+
+        print('sec=%.2f' % self._sec)
+
+    def change_note_base(self, key_sym):
+        """
+        """
+        self.__log.debug('key_sym=%a', key_sym)
+
+        if key_sym == 'KEY_PGUP':
+            self._note_base += 12
+
+        if key_sym == 'KEY_PGDOWN':
+            self._note_base -= 12
+
+        if self._note_base < self.NOTE_BASE_MIN:
+            self._note_base = self.NOTE_BASE_MIN
+            self.__log.warning('fix: note_base=%s', self._note_base)
+
+        if self._note_base > self.NOTE_BASE_MAX:
+            self._note_base = self.NOTE_BASE_MAX
+            self.__log.warning('fix: note_base=%s', self._note_base)
+
+        print('note_base=%s' % self._note_base)
+
+    def change_vol(self, sym):
+        """
+        """
+        self.__log.debug('sym=%s', sym)
+
+        if sym == 'KEY_UP':
+            self._vol += 0.05
+
+        if sym == 'KEY_DOWN':
+            self._vol -= 0.05
+
+        if self._vol < self.VOLUME_MIN:
+            self._vol = self.VOLUME_MIN
+            self.__log.warning('fix: vol=%s', self._vol)
+
+        if self._vol > self.VOLUME_MAX:
+            self._vol = self.VOLUME_MAX
+            self.__log.warning('fix: vol=%s', self._vol)
+
+        print('vol=%.2f' % self._vol)
 
     def play(self, key_sym):
         """
         """
         self.__log.debug('key_sym=%a', key_sym)
 
-        note = self._note_base + int(key_sym) - 1
+        offset_list = [0, 2, 4, 5, 7, 9, 11, 12]
+        idx = '12345678'.index(key_sym)
+        offset = offset_list[idx]
+
+        note = self._note_base + offset
         self.__log.debug('note=%s', note)
 
         freq = self._mu.note2freq(note)
         self.__log.debug('freq=%s', freq)
 
         wav = WavUtil.Wav(freq, self._sec, self._rate, debug=self._dbg)
-        wav.play(self._vol, blocking=False)
+
+        snd = pygame.sndarray.make_sound(wav._wav)
+        snd.set_volume(self._vol)
+        snd.play(fade_ms=50)
+
+        print('note:%d, %.2fHz, %.2fsec, vol:%.2f, rate:%s' % (
+            note, freq, self._sec, self._vol, self._rate))
 
     def quit(self, key_sym):
         """
