@@ -19,84 +19,7 @@ $ pip install -U numpy sounddevice
 __author__ = 'Yoichi Tanibayashi'
 __date__   = '2020'
 
-import numpy
-import sounddevice
-import wave
-import array
-import threading
 from MyLogger import get_logger
-
-
-class Wav:
-    """Wav
-
-    Attributes
-    ----------
-    attr1: type(int|str|list of str ..)
-        description
-    """
-    DEF_SEC = 0.5  # sec
-    DEF_RATE = 44100  # Hz
-    VOL_MAX = 60000
-    DEF_VOL = 3000
-
-    __log = get_logger(__name__, False)
-
-    def __init__(self, freq, sec=DEF_SEC, rate=DEF_RATE, debug=False):
-        """constructor
-
-        Parameters
-        ----------
-        """
-        self._dbg = debug
-        __class__.__log = get_logger(__class__.__name__, self._dbg)
-        self.__log.debug('freq,sec,rate=%s', (freq, sec, rate))
-
-        self._wav = self.mk_wav(freq, sec, rate)
-
-    def mk_wav(self, freq, sec=DEF_SEC, rate=DEF_RATE):
-        """method1
-
-        Parameters
-        ----------
-        """
-        self.__log.debug('freq,sec,rate=%s', (freq, sec, rate))
-
-        samples = numpy.arange(0, rate * sec)
-        sin_wave1 = numpy.sin(2 * numpy.pi * freq * samples / rate)
-        # 16bit 符号付き整数に変換
-        sin_wave2 = [int(x * 32767.0) for x in sin_wave1]
-
-        return sin_wave2
-
-    def save(self, outfile, rate=DEF_RATE):
-        """
-        outfile: str
-        """
-        self.__log.debug('outfile=%s, rate=%s', outfile, rate)
-
-        w_write = wave.Wave_write(outfile)
-        w_write.setparams((
-            1, 2, rate, len(self._wav), 'NONE', 'not compressed'))
-        w_write.writeframes(array.array('h', self._wav).tobytes())
-        w_write.close()
-
-    def play(self, vol=DEF_VOL, rate=DEF_RATE, blocking=True):
-        """
-        Parameters
-        ----------
-        rate: int
-        blocking: bool
-        """
-        self.__log.debug('vol=%s, rate=%s, blocking=%s',
-                         vol, rate, blocking)
-
-        if vol > self.VOL_MAX:
-            vol = self.VOL_MAX
-            self.__log.warning('fix: vol=%s', vol)
-
-        w_out = [int(x * vol) for x in self._wav]
-        sounddevice.play(w_out, rate, blocking=blocking)
 
 
 # --- 以下、サンプル ---
@@ -105,12 +28,17 @@ class Wav:
 import pygame
 import mido
 import glob
+import threading
 import MidiUtil
 
 
 class SampleApp:
     """Sample application class
     """
+    VOLUME_MAX = 1.0
+    VOLUME_MIN = 0.0
+
+    DEF_VOLUME = 0.18
 
     __log = get_logger(__name__, False)
 
@@ -122,8 +50,18 @@ class SampleApp:
         """
         self._dbg = debug
         __class__.__log = get_logger(__class__.__name__, self._dbg)
+        self.__log.debug('midi_file=%s, vol=%s', midi_file, vol)
 
         self._midi_file = midi_file
+
+        if vol > self.VOLUME_MAX:
+            vol = self.VOLUME_MAX
+            self.__log.debug('fix: vol=%s', vol)
+
+        if vol < self.VOLUME_MIN:
+            vol = self.VOLUME_MIN
+            self.__log.debug('fix: vol=%s', vol)
+
         self._vol = vol
 
         pygame.mixer.init()
@@ -134,10 +72,8 @@ class SampleApp:
         self._snd = self.load_wav()
 
     def load_wav(self):
-        glob_pattern = "note_wav/*.wav"
-#        glob_pattern = "../MusicBox/wav/3*.wav"
+        glob_pattern = "note_wav/note*.wav"
         wav_files = sorted(glob.glob(glob_pattern))
-        print(len(wav_files))
 
         snd_list = []
         for f in wav_files:
@@ -145,6 +81,8 @@ class SampleApp:
             snd.set_volume(self._vol)
             snd_list.append(snd)
             
+        self.__log.debug('done')
+
         return snd_list
 
     def main(self):
@@ -153,6 +91,7 @@ class SampleApp:
         self.__log.debug('')
 
         msg = self._midi.play()
+        self.__log.debug('play(): done')
 
         for m in msg:
             if m.type != 'note_on':
@@ -184,8 +123,8 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 Description
 ''')
 @click.argument('midi_file', type=click.Path(exists=True))
-@click.option('--vol', '-v', 'vol', type=float, default=0.25,
-              help='volume')
+@click.option('--vol', '-v', 'vol', type=float, default=SampleApp.DEF_VOLUME,
+              help='volume: 0 .. 1.0, default=%s' % SampleApp.DEF_VOLUME)
 @click.option('--debug', '-d', 'debug', is_flag=True, default=False,
               help='debug flag')
 def main(midi_file, vol, debug):
