@@ -163,8 +163,8 @@ class SampleApp:
 
             print('channel:%s note:%s, velocity:%s' % (
                 m.channel, m.note, m.velocity))
-            # self._snd[m.note].play(fade_ms=100)
-            threading.Thread(target=self._snd[m.note].play).start()
+            self._snd[m.note].play(fade_ms=10)
+            # threading.Thread(target=self._snd[m.note].play).start()
 
         self.__log.debug('done')
 
