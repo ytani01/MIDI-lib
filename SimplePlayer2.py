@@ -70,7 +70,7 @@ class SampleApp:
 
         self._cui = CuiUtil.CuiKey([
             CuiUtil.CuiCmd('123456789', self.play),
-            CuiUtil.CuiCmd('q', self.quit)
+            CuiUtil.CuiCmd(['q', 'KEY_ESCAPE'], self.quit)
         ], debug=self._dbg)
 
     def play(self, key_sym):
