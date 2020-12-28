@@ -23,6 +23,7 @@ import numpy
 import sounddevice
 import wave
 import array
+import threading
 from MyLogger import get_logger
 
 
@@ -113,7 +114,7 @@ class SampleApp:
 
     __log = get_logger(__name__, False)
 
-    def __init__(self, midi_file, debug=False):
+    def __init__(self, midi_file, vol, debug=False):
         """constructor
 
         Parameters
@@ -123,6 +124,7 @@ class SampleApp:
         __class__.__log = get_logger(__class__.__name__, self._dbg)
 
         self._midi_file = midi_file
+        self._vol = vol
 
         pygame.mixer.init()
 
@@ -136,7 +138,14 @@ class SampleApp:
 #        glob_pattern = "../MusicBox/wav/3*.wav"
         wav_files = sorted(glob.glob(glob_pattern))
         print(len(wav_files))
-        return [pygame.mixer.Sound(f) for f in wav_files]
+
+        snd_list = []
+        for f in wav_files:
+            snd = pygame.mixer.Sound(f)
+            snd.set_volume(self._vol)
+            snd_list.append(snd)
+            
+        return snd_list
 
     def main(self):
         """main
@@ -154,7 +163,8 @@ class SampleApp:
 
             print('channel:%s note:%s, velocity:%s' % (
                 m.channel, m.note, m.velocity))
-            self._snd[m.note].play(fade_ms=100)
+            # self._snd[m.note].play(fade_ms=100)
+            threading.Thread(target=self._snd[m.note].play).start()
 
         self.__log.debug('done')
 
@@ -174,14 +184,16 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 Description
 ''')
 @click.argument('midi_file', type=click.Path(exists=True))
+@click.option('--vol', '-v', 'vol', type=float, default=0.25,
+              help='volume')
 @click.option('--debug', '-d', 'debug', is_flag=True, default=False,
               help='debug flag')
-def main(midi_file, debug):
+def main(midi_file, vol, debug):
     """サンプル起動用メイン関数
     """
     __log = get_logger(__name__, debug)
 
-    app = SampleApp(midi_file, debug=debug)
+    app = SampleApp(midi_file, vol, debug=debug)
     try:
         app.main()
     finally:
