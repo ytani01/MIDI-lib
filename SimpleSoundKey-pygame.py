@@ -76,7 +76,8 @@ class SampleApp:
             CuiUtil.CuiCmd('12345678', self.play),
             CuiUtil.CuiCmd(['KEY_UP', 'KEY_DOWN'], self.change_vol),
             CuiUtil.CuiCmd(['KEY_RIGHT', 'KEY_LEFT'], self.change_sec),
-            CuiUtil.CuiCmd(['KEY_PGUP', 'KEY_PGDOWN'], self.change_note_base),
+            CuiUtil.CuiCmd(['KEY_PGUP', 'KEY_PGDOWN'],
+                           self.change_note_base),
             CuiUtil.CuiCmd(['q', 'KEY_ESCAPE'], self.quit)
         ], debug=self._dbg)
 

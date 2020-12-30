@@ -25,6 +25,10 @@ __date__   = '2020'
 
 import mido
 import copy
+import time
+import threading
+import pygame
+from WavUtil import Wav
 from MyLogger import get_logger
 
 
@@ -81,8 +85,6 @@ class DataEnt:
         0 .. 127
     end_time: float
         sec >= abs_time > 0
-    length: float
-        sec >= 0
     """
     __log = get_logger(__name__, True)
 
@@ -90,15 +92,17 @@ class DataEnt:
                  velocity=None, end_time=None, debug=False):
         self._dbg = debug
         self.__log = get_logger(__class__.__name__, self._dbg)
-        self.__log.debug('time,ch,note,velo=%s',
-                         (abs_time, channel, note, velocity))
+        self.__log.debug('time,ch,note,velo,end=%s',
+                         (abs_time, channel, note, velocity,
+                          end_time))
 
         self.abs_time = abs_time
         self.channel = channel
         self.note = note
         self.velocity = velocity
         self.end_time = end_time
-        self.length = 0
+        self.wav = None
+        self.snd = None
 
     def __str__(self):
         """
@@ -112,10 +116,14 @@ class DataEnt:
             self.channel, self.note, self.velocity)
 
         if self.end_time is not None and self.end_time != self.abs_time:
-            str_data += ' ... %08.3f' % (self.end_time)
-            str_data += ' (%.3f sec)' % (self.length)
+            if type(self.end_time) == float:
+                str_data += ' ... end:%08.3f' % (self.end_time)
+                str_data += ' (%.3f sec)' % (self.length())
 
         return str_data
+
+    def length(self):
+        return self.end_time - self.abs_time
 
 
 class Parser:
@@ -154,6 +162,10 @@ class Parser:
         self.__log.debug('')
 
         self._channel_list = None
+
+        self._mu = Util(debug=self._dbg)
+
+        pygame.mixer.init(channels=1)
 
     def parse1(self, midi_obj):
         """
@@ -259,7 +271,6 @@ class Parser:
             # velocity == 0
 
             ent.end_time = ent.abs_time
-            ent.length = 0
 
             try:
                 i2 = note_start[(ent.channel, ent.note)]
@@ -268,10 +279,12 @@ class Parser:
                 self.__log.warning(msg)
                 continue
 
-            out_data[i2].end_time = ent.abs_time
-            out_data[i2].length = ent.abs_time - out_data[i2].abs_time
+            if i2 is None:
+                continue
 
-        note_start[(ent.channel, ent.note)] = None
+            out_data[i2].end_time = ent.abs_time
+
+            note_start[(ent.channel, ent.note)] = None
 
         self.__log.debug('note_start=%s', note_start)
 
@@ -279,12 +292,31 @@ class Parser:
             if note_start[k] is not None:
                 i2 = note_start[k]
                 out_data[i2].end_time = ent.abs_time
-                out_data[i2].length = ent.abs_time - out_data[i2].abs_time
                 note_start[k] = None
 
         self.__log.debug('note_start=%s', note_start)
 
         return out_data
+
+    def mk_wav(self, in_data):
+        """
+        """
+        rate = 44100
+        vol = 0.2
+
+        for i, d in enumerate(in_data):
+            print(i, d)
+            if d.velocity == 0:
+                continue
+
+            freq = self._mu.note2freq(d.note)
+
+            wav = Wav(freq, d.length(), rate, debug=self._dbg)._wav
+
+            d.snd = pygame.sndarray.make_sound(wav)
+            d.snd.set_volume(d.velocity/128/2)
+
+        return in_data
 
     def parse(self, midi_file, channel=None):
         """
@@ -317,8 +349,45 @@ class Parser:
 
         data3 = self.set_end_time(data2)
 
-        out_data = {'channel_list': self._channel_list, 'data': data3}
+        data4 = self.mk_wav(data3)
+
+        out_data = {'channel_list': self._channel_list, 'data': data4}
         return out_data
+
+    def play_sound(self, data):
+        """
+        must be override
+        """
+        data.snd.play(fade_ms=50)
+
+    def play(self, parsed_midi):
+        """
+        """
+        channel_list = parsed_midi['channel_list']
+        data = parsed_midi['data']
+
+        abs_time = 0
+
+        for i, d in enumerate(data):
+            self.__log.debug('(%4d) %s', i, d)
+
+            delay = d.abs_time - abs_time
+            self.__log.debug('delay=%s', delay)
+
+            time.sleep(delay)
+
+            abs_time = d.abs_time
+            self.__log.debug('abs_time=%s', abs_time)
+
+            if d.channel not in channel_list:
+                continue
+
+            if d.velocity == 0:
+                continue
+
+            self.play_sound(d)
+#            threading.Thread(target=self.play_sound, args=(d,),
+#                             daemon=True).start()
 
 
 # --- 以下、サンプル ---
@@ -374,8 +443,8 @@ class SampleApp:
         print('parsed data ..')
         for i, d in enumerate(parsed_data['data']):
 
-            if d.length > 0:
-                interval.append(round(d.length, 2))
+            if d.length() > 0:
+                interval.append(round(d.length(), 3))
 
             if d.velocity == 0 and self._note_end_flag is False:
                 continue
@@ -385,6 +454,8 @@ class SampleApp:
         print('channel_list=%s' % (parsed_data['channel_list']))
         interval = sorted(list(set(interval)))
         print('interval=%s' % (interval))
+
+        self._parser.play(parsed_data)
 
         if self._out_file:
             with open(self._out_file, mode='w') as f:

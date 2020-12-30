@@ -28,7 +28,6 @@ from MyLogger import get_logger
 import pygame
 import mido
 import glob
-import threading
 import MidiUtil
 
 
@@ -80,7 +79,7 @@ class SampleApp:
             snd = pygame.mixer.Sound(f)
             snd.set_volume(self._vol)
             snd_list.append(snd)
-            
+
         self.__log.debug('done')
 
         return snd_list
