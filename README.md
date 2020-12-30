@@ -2,6 +2,14 @@
 
 MIDI utilities and test programs
 
+## ToDo
+
+### マルチトラックへの対応
+
+* `note_on` .. `note_on` .. `note_off` .. `note_off` というパターンに対応
+* mido.merge_tracks()を使わない
+* トラックを選択可能にする
+
 ## TL;DR
 
 Install
