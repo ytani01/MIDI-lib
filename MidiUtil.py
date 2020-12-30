@@ -302,7 +302,6 @@ class Parser:
         """
         """
         rate = 44100
-        vol = 0.2
 
         for i, d in enumerate(in_data):
             print(i, d)
@@ -314,7 +313,7 @@ class Parser:
             wav = Wav(freq, d.length(), rate, debug=self._dbg)._wav
 
             d.snd = pygame.sndarray.make_sound(wav)
-            d.snd.set_volume(d.velocity/128/2)
+            d.snd.set_volume(d.velocity/128/8)
 
         return in_data
 
