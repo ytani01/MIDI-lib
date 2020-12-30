@@ -10,6 +10,14 @@ MIDI utilities and test programs
 * mido.merge_tracks()を使わない
 * トラックを選択可能にする
 
+
+### 音源データを全て作ると、パフォーマンスが悪い
+
+* あらかじめ長い音を作っておく
+* マルチスレッドで再生
+* 指定の長さで、stop()で止める
+
+
 ## TL;DR
 
 Install
