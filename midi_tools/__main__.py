@@ -39,8 +39,8 @@ class MidiApp:
         parsed_data = self._parser.parse(self._midi_file, self._channel)
 
         if self._dbg or self._parse_only:
-            for d in parsed_data['data']:
-                print(d)
+            for i, d in enumerate(parsed_data['data']):
+                print('(%4d) %s' % (i, d))
 
             print('channel_set=', parsed_data['channel_set'])
 

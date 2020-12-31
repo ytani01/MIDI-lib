@@ -45,7 +45,6 @@ class NoteInfo:
         self.note = note
         self.velocity = velocity
         self.end_time = end_time
-        self.snd = None
 
     def __str__(self):
         """
