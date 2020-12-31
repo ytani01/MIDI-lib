@@ -26,6 +26,7 @@ __date__   = '2020'
 import mido
 import copy
 import time
+import threading
 import pygame
 from WavUtil import Wav
 from MyLogger import log, get_logger, set_debug
@@ -134,8 +135,10 @@ class Parser:
     DEF_NOTE_BASE = 60
 
     SND_RATE = 11025
-    SND_LEN_MAX = 1.5
+    SND_LEN_MAX = 1.2
     SND_LEN_MIN = 0.1
+
+    SND_PLAY_FACTOR = 0.95
 
     __log = get_logger(__name__, False)
 
@@ -380,8 +383,11 @@ class Parser:
         key = self.snd_key(note_data)
 
         snd = self._snd[key]
-        snd.set_volume(note_data.velocity/128/8)
-        snd.play(fade_ms=5, maxtime=800)
+        vol = note_data.velocity / 128 / 8
+        maxtime=int(self.SND_LEN_MAX * self.SND_PLAY_FACTOR * 1000)
+
+        snd.set_volume(vol)
+        snd.play(fade_ms=5, maxtime=maxtime)
 
     def play(self, parsed_midi):
         """
