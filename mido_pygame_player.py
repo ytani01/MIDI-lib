@@ -3,18 +3,7 @@
 # (c) 2020 Yoichi Tanibayashi
 #
 """
-Make sound
-
-### Install
-
-(1) Linux packages
-
-$ apt install portaudio2
-
-(2) Python packages
-
-$ pip install -U numpy sounddevice
-
+SimpleMidiPlayer.py
 """
 __author__ = 'Yoichi Tanibayashi'
 __date__   = '2020'
@@ -28,7 +17,6 @@ from MyLogger import get_logger
 import pygame
 import mido
 import glob
-import MidiUtil
 
 
 class SampleApp:
@@ -66,7 +54,6 @@ class SampleApp:
         pygame.mixer.init()
 
         self._midi = mido.MidiFile(self._midi_file)
-        self._mu = MidiUtil.Util()
 
         self._snd = self.load_wav()
 
@@ -99,10 +86,9 @@ class SampleApp:
             if m.velocity == 0:
                 continue
 
+            self._snd[m.note].play(fade_ms=10, maxtime=900)
             print('channel:%s note:%s, velocity:%s' % (
                 m.channel, m.note, m.velocity))
-            self._snd[m.note].play(fade_ms=10)
-            # threading.Thread(target=self._snd[m.note].play).start()
 
         self.__log.debug('done')
 
@@ -119,10 +105,11 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 
 @click.command(context_settings=CONTEXT_SETTINGS, help='''
-Description
+Simple MIDI player
 ''')
 @click.argument('midi_file', type=click.Path(exists=True))
-@click.option('--vol', '-v', 'vol', type=float, default=SampleApp.DEF_VOLUME,
+@click.option('--vol', '-v', 'vol', type=float,
+              default=SampleApp.DEF_VOLUME,
               help='volume: 0 .. 1.0, default=%s' % SampleApp.DEF_VOLUME)
 @click.option('--debug', '-d', 'debug', is_flag=True, default=False,
               help='debug flag')

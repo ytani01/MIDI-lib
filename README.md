@@ -1,40 +1,81 @@
-# midi-utils
+# MIDI-utils
 
 MIDI utilities and test programs
 
-## TL;DR
+midoを使って、より使いやすい形にパージングする。
+
+* 全トラックを合成
+* channelを選択することが可能
+* イベント単位では無く、note単位で解析
+* note毎に、開始時刻と終了時刻を絶対時間(曲の開始からの秒数)で算出
+* プレーヤー関数で、簡単に確認することができる
+
+
+## ToDo
+
+* Player.play()で、
+  時間を監視して、ズレをより少なくする。
+
+
+## 1. TL;DR
 
 Install
 ```bash
 $ cd ~
 $ python3 -m venv env1
 $ cd env1
-$ git clone https://github.com/ytani01/midi-utils.git
-$ cd midi-utils
+$ git clone https://github.com/ytani01/MIDI-utils.git
+$ cd MIDI-utils
 $ . ./bin/activate
 (env1)$ pip install -r requirements.txt
 ```
 
-Execute
+Execute parser
 ```bash
-$ ./MidiParser.py midi_file
-
-$ ./MidiPaperTape.py midi_file
+$ python -m midi_tools parse midi_file
 ```
 
-## 高速化の工夫
+Execute player
+```bash
+$ python -m midi_tools play midi_file
+```
 
-まじめに全てのnoteに対して音を生成すると時間がかかるので、
-以下のような工夫をしている。
+## 2. for detail
 
-* 全ノートに対してでは無く、
-  `(note_num, length)` をキーとしたパターンで作成
-* `max_length` と `mini_length` を決め、範囲を限定
-* `length` を 0.1 sec 単位に丸めて、パターンを減少
+### 2.1 API
+
+```bash
+python3 -m pydoc midi_tools.Parser.parse
+python3 -m pydoc midi_tools.Player.play
+```
+
+### 2.2 parsed data
+
+```bash
+python3 -m pydoc midi_tools.NoteInfo
+```
+
+## 3. Sample program
+
+sample_player.py
+```python
+#!/usr/bin/env python3
+
+import sys
+from midi_tools import *
+
+pa = Parser()
+pl = Player()
+
+data = pa.parse(sys.argv[1])
+pl.play(data)
+```
+
 
 ## A. Reference
 
 * [Mido - MIDI Objects for Python](https://mido.readthedocs.io/en/latest/)
+
 
 ## B. Misc
 

@@ -1,4 +1,5 @@
 mido
+pygame
 numpy
 sounddevice
 click

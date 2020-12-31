@@ -23,7 +23,7 @@ $ ./mu.py file.mid
 __author__ = 'Yoichi Tanibayashi'
 __date__   = '2020'
 
-from MyLogger import log, get_logger, set_debug
+from .MyLogger import log
 
 
 FREQ_BASE = 440
