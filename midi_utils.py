@@ -28,7 +28,7 @@ from MyLogger import log, get_logger, set_debug
 
 FREQ_BASE = 440
 NOTE_BASE = 69
-
+NOTE_N = 128
 
 def note2freq(note):
     """
