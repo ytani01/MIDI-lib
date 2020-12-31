@@ -56,7 +56,7 @@ class Wav:
         self._sec = sec
         self._rate = rate
 
-        self._wav = self.mk_wav()
+        self.wav = self.mk_wav()
 
     def mk_wav(self):
         """method1
@@ -96,8 +96,8 @@ class Wav:
 
         w_write = wave.Wave_write(outfile)
         w_write.setparams((
-            1, 2, self._rate, len(self._wav), 'NONE', 'not compressed'))
-        w_write.writeframes(array.array('h', self._wav).tobytes())
+            1, 2, self._rate, len(self.wav), 'NONE', 'not compressed'))
+        w_write.writeframes(array.array('h', self.wav).tobytes())
         w_write.close()
 
     def play(self, vol=DEF_VOL, blocking=False):
@@ -117,7 +117,7 @@ class Wav:
             vol = self.VOL_MIN
             self.__log.warning('fix: vol=%s', vol)
 
-        w_list = [int(x * vol) for x in self._wav]
+        w_list = [int(x * vol) for x in self.wav]
         w_out = numpy.array(w_list, dtype=numpy.int16)
 
         sounddevice.play(w_out, self._rate, blocking=blocking)

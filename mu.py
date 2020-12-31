@@ -7,17 +7,17 @@ MIDI parser for
 
 ### for detail and simple usage
 
-$ python3 -m pydoc MidiUtil
+$ python3 -m pydoc mu
 
 
 ### API
 
-see comment of ``MidiUtil`` class
+see comment of ``mu`` class
 
 
 ### sample program
 
-$ ./MidiUtil.py file.mid
+$ ./mu.py file.mid
 
 """
 __author__ = 'Yoichi Tanibayashi'
@@ -26,47 +26,31 @@ __date__   = '2020'
 import mido
 import copy
 import time
-import threading
 import pygame
 from WavUtil import Wav
-from MyLogger import get_logger
+from MyLogger import log, get_logger, set_debug
 
 
-__log = get_logger(__name__, False)
+FREQ_BASE = 440
+NOTE_BASE = 69
 
 
-class Util:
+def note2freq(note):
     """
-    MIDI Utilties
+    MIDI note number to frequency
+
+    Parameters
+    ----------
+    note: int
+
+    Returns
+    -------
+    freq: float
     """
-    __log = get_logger(__name__, True)
+    log.debug('note=%s', note)
 
-    FREQ_BASE = 440
-    NOTE_BASE = 69
-
-    NOTE_MIN = 41   # ?
-    NOTE_MAX = 112  # ?
-
-    def __init__(self, debug=False):
-        self._dbg = debug
-        self.__log = get_logger(__class__.__name__, self._dbg)
-
-    def note2freq(self, note):
-        """
-        MIDI note number to frequency
-
-        Parameters
-        ----------
-        note: int
-
-        Returns
-        -------
-        freq: float
-        """
-        self.__log.debug('note=%s', note)
-
-        freq = self.FREQ_BASE * 2.0 ** (float(note - self.NOTE_BASE)/12.0)
-        return freq
+    freq = FREQ_BASE * 2.0 ** (float(note - NOTE_BASE)/12.0)
+    return freq
 
 
 class DataEnt:
@@ -118,11 +102,13 @@ class DataEnt:
         if self.end_time is not None and self.end_time != self.abs_time:
             if type(self.end_time) == float:
                 str_data += ' ... end:%08.3f' % (self.end_time)
-                str_data += ' (%.3f sec)' % (self.length())
+                str_data += ' (%.2f sec)' % (self.length())
 
         return str_data
 
     def length(self):
+        self.__log.debug('%08.3f, %s, %s',
+                         self.abs_time, self.note, self.velocity)
         return self.end_time - self.abs_time
 
 
@@ -136,9 +122,9 @@ class Parser:
     Simple Usage
     ------------
     ============================================================
-    import MidiUtil
+    import mu
 
-    parser = MidiUtil.Parser(midi_file)
+    parser = mu.Parser(midi_file)
 
     midi_data = parser.parse()
     ============================================================
@@ -146,6 +132,10 @@ class Parser:
     """
     NOTE_N = 128
     DEF_NOTE_BASE = 60
+
+    SND_RATE = 11025
+    SND_LEN_MAX = 1.5
+    SND_LEN_MIN = 0.1
 
     __log = get_logger(__name__, False)
 
@@ -161,11 +151,11 @@ class Parser:
         self.__log = get_logger(__class__.__name__, self._dbg)
         self.__log.debug('')
 
-        self._channel_list = None
+        self._channel_set = None
 
-        self._mu = Util(debug=self._dbg)
+        pygame.mixer.init(frequency=self.SND_RATE, channels=1)
 
-        pygame.mixer.init(channels=1)
+        self._snd = {}
 
     def parse1(self, midi_obj):
         """
@@ -186,9 +176,10 @@ class Parser:
         merged_tracks = mido.merge_tracks(midi_obj.tracks)
 
         tpb = midi_obj.ticks_per_beat
+
+        channel_set = set()
         out_data = []
         abs_time = 0
-        self._channel_list = []
         cur_tempo = None
 
         for msg in merged_tracks:
@@ -213,17 +204,15 @@ class Parser:
                 data_ent = DataEnt(abs_time, msg.channel, msg.note, 0,
                                    debug=self._dbg)
                 out_data.append(data_ent)
-                self._channel_list.append(msg.channel)
+                channel_set.add(msg.channel)
 
             if msg.type == 'note_on':
                 data_ent = DataEnt(abs_time, msg.channel, msg.note,
                                    msg.velocity, debug=self._dbg)
                 out_data.append(data_ent)
-                self._channel_list.append(msg.channel)
+                channel_set.add(msg.channel)
 
-        self._channel_list = sorted(list(set(self._channel_list)))
-
-        return out_data
+        return (channel_set, out_data)
 
     def select_channel(self, in_data, channel=None):
         """
@@ -263,8 +252,14 @@ class Parser:
         note_start = {}
 
         for i, ent in enumerate(out_data):
+            key = (ent.channel, ent.note)
+
             if ent.velocity > 0:
-                note_start[(ent.channel, ent.note)] = i
+                if key in note_start.keys():
+                    note_start[key].append(i)
+                else:
+                    note_start[key] = [i]
+
                 self.__log.debug('note_start=%s', note_start)
                 continue
 
@@ -273,47 +268,70 @@ class Parser:
             ent.end_time = ent.abs_time
 
             try:
-                i2 = note_start[(ent.channel, ent.note)]
+                idx2 = note_start[key].pop(0)
             except KeyError as ex:
-                msg = '%s:%s' % (type(ex).__name__, ex)
+                msg = '%s:%s .. ignored' % (type(ex).__name__, ex)
                 self.__log.warning(msg)
                 continue
 
-            if i2 is None:
-                continue
+            self.__log.debug('%s, %s, %s', key, note_start[key], idx2)
 
-            out_data[i2].end_time = ent.abs_time
+            out_data[idx2].end_time = ent.abs_time
 
-            note_start[(ent.channel, ent.note)] = None
+            if not note_start[key]:
+                note_start.pop(key)
 
-        self.__log.debug('note_start=%s', note_start)
+            self.__log.debug('note_start=%s', note_start)
 
-        for k in note_start.keys():
-            if note_start[k] is not None:
-                i2 = note_start[k]
-                out_data[i2].end_time = ent.abs_time
-                note_start[k] = None
+        for k in note_start:
+            for idx in note_start[k]:
+                out_data[idx].end_time = ent.abs_time
 
         self.__log.debug('note_start=%s', note_start)
 
         return out_data
 
+    def snd_key(self, note_data):
+        """
+        """
+        sec = note_data.length()
+
+        if sec > self.SND_LEN_MAX:
+            sec = self.SND_LEN_MAX
+
+        if sec < self.SND_LEN_MIN:
+            sec = self.SND_LEN_MIN
+
+        key_sec = '%.1f' % sec
+        key = (note_data.note, key_sec)
+        return key
+
     def mk_wav(self, in_data):
         """
         """
-        rate = 44100
-
         for i, d in enumerate(in_data):
-            print(i, d)
             if d.velocity == 0:
                 continue
 
-            freq = self._mu.note2freq(d.note)
+            key = self.snd_key(d)
 
-            wav = Wav(freq, d.length(), rate, debug=self._dbg)._wav
+            if key in self._snd.keys():
+                continue
 
-            d.snd = pygame.sndarray.make_sound(wav)
-            d.snd.set_volume(d.velocity/128/8)
+            freq = note2freq(d.note)
+            sec = d.length()
+
+            if sec > self.SND_LEN_MAX:
+                sec = self.SND_LEN_MAX
+
+            if sec < self.SND_LEN_MIN:
+                sec = self.SND_LEN_MIN
+
+            self.__log.info('%s', key)
+
+            wav = Wav(freq, sec, self.SND_RATE, debug=self._dbg).wav
+
+            self._snd[key] = pygame.sndarray.make_sound(wav)
 
         return in_data
 
@@ -330,19 +348,20 @@ class Parser:
 
         Returns
         -------
-        out_data: {'channel_list': list of int, 'data': list of DataEnt}
+        out_data: {'channel_set': list of int, 'data': list of DataEnt}
 
         """
         self.__log.debug('midi_file=%s, channel=%s', midi_file, channel)
 
         midi_obj = mido.MidiFile(midi_file)
 
-        data1 = self.parse1(midi_obj)
+        self._channel_set, data1 = self.parse1(midi_obj)
 
         if self._dbg:
             self.__log.debug('data1=')
             for d in data1:
                 print(d)
+        self.__log.debug('channel_set=%s', self._channel_set)
 
         data2 = self.select_channel(data1, channel)
 
@@ -350,19 +369,24 @@ class Parser:
 
         data4 = self.mk_wav(data3)
 
-        out_data = {'channel_list': self._channel_list, 'data': data4}
+        print(sorted(self._snd.keys()))
+
+        out_data = {'channel_set': self._channel_set, 'data': data4}
         return out_data
 
-    def play_sound(self, data):
+    def play_sound(self, note_data):
         """
-        must be override
         """
-        data.snd.play(fade_ms=50)
+        key = self.snd_key(note_data)
+
+        snd = self._snd[key]
+        snd.set_volume(note_data.velocity/128/8)
+        snd.play(fade_ms=5, maxtime=800)
 
     def play(self, parsed_midi):
         """
         """
-        channel_list = parsed_midi['channel_list']
+        channel_set = parsed_midi['channel_set']
         data = parsed_midi['data']
 
         abs_time = 0
@@ -378,7 +402,7 @@ class Parser:
             abs_time = d.abs_time
             self.__log.debug('abs_time=%s', abs_time)
 
-            if d.channel not in channel_list:
+            if d.channel not in channel_set:
                 continue
 
             if d.velocity == 0:
@@ -450,9 +474,8 @@ class SampleApp:
 
             print('(%4d) %s' % (i, d))
 
-        print('channel_list=%s' % (parsed_data['channel_list']))
+        print('channel_set=%s' % (parsed_data['channel_set']))
         interval = sorted(list(set(interval)))
-        print('interval=%s' % (interval))
 
         self._parser.play(parsed_data)
 
@@ -484,22 +507,22 @@ MidiUtil sample program
 @click.option('--note_end', '-e', 'note_end', is_flag=True,
               default=False,
               help="print note end flag")
-@click.option('--debug', '-d', 'debug', is_flag=True, default=False,
+@click.option('--debug', '-d', 'dbg', is_flag=True, default=False,
               help='debug flag')
-def main(midi_file, out_file, channel, note_end, debug):
+def main(midi_file, out_file, channel, note_end, dbg):
     """サンプル起動用メイン関数
     """
-    __log = get_logger(__name__, debug)
-    __log.debug('midi_file=%s', midi_file)
-    __log.debug('out_file=%s', out_file)
-    __log.debug('channel=%s', channel)
-    __log.debug('note_end=%s', note_end)
+    set_debug(dbg)
+    log.debug('midi_file=%s', midi_file)
+    log.debug('out_file=%s', out_file)
+    log.debug('channel=%s', channel)
+    log.debug('note_end=%s', note_end)
 
-    app = SampleApp(midi_file, out_file, channel, note_end, debug=debug)
+    app = SampleApp(midi_file, out_file, channel, note_end, debug=dbg)
     try:
         app.main()
     finally:
-        __log.debug('finally')
+        log.debug('finally')
         app.end()
 
 

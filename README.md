@@ -2,22 +2,6 @@
 
 MIDI utilities and test programs
 
-## ToDo
-
-### マルチトラックへの対応
-
-* `note_on` .. `note_on` .. `note_off` .. `note_off` というパターンに対応
-* mido.merge_tracks()を使わない
-* トラックを選択可能にする
-
-
-### 音源データを全て作ると、パフォーマンスが悪い
-
-* あらかじめ長い音を作っておく
-* マルチスレッドで再生
-* 指定の長さで、stop()で止める
-
-
 ## TL;DR
 
 Install
@@ -38,6 +22,15 @@ $ ./MidiParser.py midi_file
 $ ./MidiPaperTape.py midi_file
 ```
 
+## 高速化の工夫
+
+まじめに全てのnoteに対して音を生成すると時間がかかるので、
+以下のような工夫をしている。
+
+* 全ノートに対してでは無く、
+  `(note_num, length)` をキーとしたパターンで作成
+* `max_length` と `mini_length` を決め、範囲を限定
+* `length` を 0.1 sec 単位に丸めて、パターンを減少
 
 ## A. Reference
 

@@ -7,7 +7,8 @@ MyLogger.py
 
 Usage:
 --
-from MyLogger import get_logger, DEBUG, INFO, WARNING, ERROR, CRITICAL
+from MyLogger import log, get_logger, set_debug, \
+    NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL
 
 class A:
     _log = get_logger(__name__, False)
@@ -26,14 +27,14 @@ class B:
         self.logger.debug('a=%s', a)
 
 def main(debug):
-    _log = get_logger(__name__, debug)
-    _log.debug('')
+    log = get_logger(__name__, debug)
+    log.debug('')
 
 --
 
 """
 __author__ = 'Yoichi Tanibayashi'
-__date__   = '2020/03/31'
+__date__   = '2020/12/31'
 
 from logging import getLogger, StreamHandler, Formatter
 from logging import NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL
@@ -73,3 +74,11 @@ myLogger = MyLogger()
 
 def get_logger(name, debug):
     return myLogger.get_logger(name, debug)
+
+
+log = get_logger(__name__, False)
+
+
+def set_debug(debug=True):
+    global log
+    log = get_logger(__name__, debug)
