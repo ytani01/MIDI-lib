@@ -21,7 +21,7 @@ $ ./mu.py file.mid
 
 """
 __author__ = 'Yoichi Tanibayashi'
-__date__   = '2020'
+__date__ = '2020'
 
 from .MyLogger import log
 

@@ -6,13 +6,13 @@
 Wav file utilites
 """
 __author__ = 'Yoichi Tanibayashi'
-__date__   = '2020'
+__date__ = '2020'
 
-import numpy
-import pygame
 import wave
 import array
 import time
+import numpy as np
+import pygame
 from .MyLogger import get_logger
 
 
@@ -57,11 +57,12 @@ class Wav:
         self.__log.debug('')
 
         # サンプリングする位置(秒)のarray
-        sample_sec = numpy.arange(self._rate * self._sec) / self._rate
+        sample_sec = np.arange(self._rate * self._sec) / self._rate
 
         # -32767 .. 32767 の sin波
-        sin_wave1 = 32767 * numpy.sin(
-            2 * numpy.pi * self._freq * sample_sec)
+        amplitude = 32767  # 振幅
+        sin_wave1 = amplitude * np.sin(
+            2 * np.pi * self._freq * sample_sec)
 
         # [Important!]
         #   fade-in/outすることで、耳障りなブツブツ音を軽減
@@ -71,15 +72,14 @@ class Wav:
         #   いいかも?
         #
         fade_len = int(sin_wave1.size * 0.01)
-        slope = (numpy.arange(fade_len)) / fade_len
+        slope = (np.arange(fade_len)) / fade_len
         sin_wave1[:fade_len] = sin_wave1[:fade_len] * slope
         fade_len = int(sin_wave1.size * 0.4)
-        slope = ((fade_len - 1) - numpy.arange(fade_len)) / fade_len
+        slope = ((fade_len - 1) - np.arange(fade_len)) / fade_len
         sin_wave1[-fade_len:] = sin_wave1[-fade_len:] * slope
 
         # int16に変換
-        sin_list1 = list(sin_wave1)
-        sin_wave2 = numpy.array(sin_list1, dtype=numpy.int16)
+        sin_wave2 = np.array(sin_wave1, dtype=np.int16)
 
         return sin_wave2
 

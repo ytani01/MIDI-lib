@@ -5,7 +5,7 @@
 MIDI player
 """
 __author__ = 'Yoichi Tanibayashi'
-__date__   = '2020'
+__date__ = '2020'
 
 import time
 import pygame
@@ -22,8 +22,6 @@ class Player:
 
     SEC_MIN = 0.02  # sec
     SEC_MAX = 1.20  # sec
-
-    # SND_PLAY_FACTOR = 0.95 * 1000
 
     __log = get_logger(__name__, False)
 
@@ -49,14 +47,18 @@ class Player:
         self._snd = {}
 
     @staticmethod
-    def within_range(n, n_min, n_max):
+    def within_range(num, n_min, n_max):
         """
         keep n within range
         """
-        return min(max(n, n_min), n_max)
+        return min(max(num, n_min), n_max)
 
     def snd_key(self, note_data, sec_min, sec_max):
         """
+        Returns
+        -------
+        key: tuple of int
+            (note_num, sec)
         """
         sec = self.within_range(note_data.length(), sec_min, sec_max)
 
@@ -71,20 +73,21 @@ class Player:
 
     def mk_wav(self, in_data, sec_min, sec_max):
         """
+        make sound data
         """
-        for i, d in enumerate(in_data):
-            if d.velocity == 0:
+        for i, note_info in enumerate(in_data):
+            if note_info.velocity == 0:
                 continue
 
-            key = self.snd_key(d, sec_min, sec_max)
+            key = self.snd_key(note_info, sec_min, sec_max)
 
             if key in self._snd.keys():
                 continue
 
-            self.__log.debug('new key: %s', key)
+            self.__log.debug('(%4d) new key: %s', i, key)
 
-            freq = note2freq(d.note)
-            sec = self.within_range(d.length(), sec_min, sec_max)
+            freq = note2freq(note_info.note)
+            sec = self.within_range(note_info.length(), sec_min, sec_max)
 
             wav = Wav(freq, sec, self._rate).wav
 
@@ -92,13 +95,14 @@ class Player:
 
         return self._snd
 
-    def play_sound(self, note_data, sec_min, sec_max) -> None:
+    def play_sound(self, note_info, sec_min, sec_max) -> None:
         """
+        play sound
         """
-        key = self.snd_key(note_data, sec_min, sec_max)
+        key = self.snd_key(note_info, sec_min, sec_max)
 
         snd = self._snd[key]
-        vol = note_data.velocity / 128 / 8
+        vol = note_info.velocity / 128 / 8
         # maxtime = int(sec_max * self.SND_PLAY_FACTOR)
 
         snd.set_volume(vol)
@@ -130,22 +134,22 @@ class Player:
 
         abs_time = 0
 
-        for i, d in enumerate(data):
-            self.__log.debug('(%4d) %s', i, d)
+        for i, note_info in enumerate(data):
+            self.__log.debug('(%4d) %s', i, note_info)
 
-            delay = d.abs_time - abs_time
+            delay = note_info.abs_time - abs_time
             self.__log.debug('delay=%s', delay)
 
             if delay > 0:
                 time.sleep(delay)
 
-            abs_time = d.abs_time
+            abs_time = note_info.abs_time
             self.__log.debug('abs_time=%s', abs_time)
 
-            if d.velocity == 0:
+            if note_info.velocity == 0:
                 continue
 
-            self.play_sound(d, sec_min, sec_max)
-            print('(%4d) %s' % (i, d))
+            self.play_sound(note_info, sec_min, sec_max)
+            print('(%4d) %s' % (i, note_info))
 
         time.sleep(.5)

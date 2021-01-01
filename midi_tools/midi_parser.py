@@ -6,7 +6,7 @@
 MIDI parser
 """
 __author__ = 'Yoichi Tanibayashi'
-__date__   = '2020'
+__date__ = '2020'
 
 import copy
 import mido
@@ -32,7 +32,8 @@ class NoteInfo:
     """
     __log = get_logger(__name__, True)
 
-    def __init__(self, abs_time=None, channel=None, note=None,
+    def __init__(self,  # pylint: disable=too-many-arguments
+                 abs_time=None, channel=None, note=None,
                  velocity=None, end_time=None, debug=False):
         self._dbg = debug
         self.__log = get_logger(__class__.__name__, self._dbg)
@@ -58,13 +59,19 @@ class NoteInfo:
             self.channel, self.note, self.velocity)
 
         if self.end_time is not None and self.end_time != self.abs_time:
-            if type(self.end_time) == float:
+            if isinstance(self.end_time, float):
                 str_data += ' ... end:%08.3f' % (self.end_time)
                 str_data += ' (%.2f sec)' % (self.length())
 
         return str_data
 
     def length(self):
+        """
+        Returns
+        -------
+        length: float
+            length of note [msec]
+        """
         return self.end_time - self.abs_time
 
 
@@ -133,13 +140,13 @@ class Parser:
 
             if msg.type == 'note_off':
                 data_ent = NoteInfo(abs_time, msg.channel, msg.note, 0,
-                                   debug=self._dbg)
+                                    debug=self._dbg)
                 out_data.append(data_ent)
                 channel_set.add(msg.channel)
 
             if msg.type == 'note_on':
                 data_ent = NoteInfo(abs_time, msg.channel, msg.note,
-                                   msg.velocity, debug=self._dbg)
+                                    msg.velocity, debug=self._dbg)
                 out_data.append(data_ent)
                 channel_set.add(msg.channel)
 
@@ -163,25 +170,27 @@ class Parser:
         """
         self.__log.debug('channel=%s', channel)
 
-        if channel is None or len(channel) == 0:
+        if channel is None or not channel:
             out_data = copy.deepcopy(in_data)
             return out_data
 
         out_data = []
-        for d in in_data:
-            if d.channel in channel:
-                out_data.append(d)
+        for data in in_data:
+            if data.channel in channel:
+                out_data.append(data)
 
         return out_data
 
     def set_end_time(self, in_data):
         """
+        set end time of NoteInfo
         """
         self.__log.debug('')
 
         out_data = copy.deepcopy(in_data)
         note_start = {}
 
+        ent = None
         for i, ent in enumerate(out_data):
             key = (ent.channel, ent.note)
 
@@ -216,7 +225,8 @@ class Parser:
 
         for k in note_start:
             for idx in note_start[k]:
-                out_data[idx].end_time = ent.abs_time
+                if ent:
+                    out_data[idx].end_time = ent.abs_time
 
         self.__log.debug('note_start=%s', note_start)
 
@@ -249,8 +259,9 @@ class Parser:
 
         if self._dbg:
             self.__log.debug('data1=')
-            for d in data1:
-                print(d)
+            for data in data1:
+                print(data)
+
         self.__log.debug('channel_set=%s', self._channel_set)
 
         data2 = self.select_channel(data1, channel)
