@@ -14,6 +14,7 @@ class MidiApp:
 
     def __init__(self, midi_file, channel, parse_only=False,
                  rate=Player.DEF_RATE,
+                 sec_min=Player.SEC_MIN, sec_max=Player.SEC_MAX,
                  debug=False) -> None:
         """
         """
@@ -22,11 +23,14 @@ class MidiApp:
         self.__log.debug('midi_file=%s, channel=%s, parse_only=%s',
                          midi_file, channel, parse_only)
         self.__log.debug('rate=%s', rate)
+        self.__log.debug('sec_min/max=%s/%s', sec_min, sec_max)
 
         self._midi_file = midi_file
         self._channel = channel
         self._parse_only = parse_only
         self._rate = rate
+        self._sec_min = sec_min
+        self._sec_max = sec_max
 
         self._parser = Parser(debug=self._dbg)
         self._player = Player(rate=self._rate, debug=self._dbg)
@@ -47,7 +51,7 @@ class MidiApp:
         if self._parse_only:
             return
 
-        self._player.play(parsed_data)
+        self._player.play(parsed_data, self._sec_min, self._sec_max)
 
     def end(self) -> None:
         """
@@ -113,14 +117,17 @@ python3 -m midi_tools COMMAND [OPTIONS] [ARGS] ...
 ''')
 @click.pass_context
 def cli(ctx):
-    if ctx.invoked_subcommand is None:
+    subcmd = ctx.invoked_subcommand
+
+    if subcmd is None:
         print()
         print('Please specify subcommand')
         print()
         print(ctx.get_help())
     else:
         print()
-        print('midi_tools command=%s\n' % ctx.invoked_subcommand)
+        print('midi_tools command = %s' % subcmd)
+        print()
 
 
 @cli.command(context_settings=CONTEXT_SETTINGS, help='''
@@ -155,15 +162,22 @@ MIDI player
 @click.option('--rate', '-r', 'rate', type=int,
               default=Player.DEF_RATE,
               help='sampling rate, default=%s Hz' % Player.DEF_RATE)
+@click.option('--sec_min', '--min', 'sec_min', type=float,
+              default=Player.SEC_MIN,
+              help='min sound length, default=%s' % (Player.SEC_MIN))
+@click.option('--sec_max', '--max', 'sec_max', type=float,
+              default=Player.SEC_MAX,
+              help='max sound length, default=%s' % (Player.SEC_MAX))
 @click.option('--debug', '-d', 'dbg', is_flag=True, default=False,
               help='debug flag')
-def play(midi_file, channel, rate, dbg) -> None:
+def play(midi_file, channel, rate, sec_min, sec_max, dbg) -> None:
     """
     player main
     """
     log = get_logger(__name__, dbg)
 
     app = MidiApp(midi_file, channel, parse_only=False, rate=rate,
+                  sec_min=sec_min, sec_max=sec_max,
                   debug=dbg)
     try:
         app.main()

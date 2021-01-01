@@ -64,16 +64,21 @@ class Wav:
             2 * numpy.pi * self._freq * sample_sec)
 
         # [Important!]
-        #   区切りのいい波長に切り詰め、プツブツ音を回避
-        sin_list1 = list(sin_wave1)
-
-        while sin_list1[-1] < 0:
-            sin_list1.pop()
-
-        while sin_list1[-1] > 0:
-            sin_list1.pop()
+        #   fade-in/outすることで、耳障りなブツブツ音を軽減
+        #
+        # [TBD]
+        #   前後のフェードする割合は、self._secに応じて片方が
+        #   いいかも?
+        #
+        fade_len = int(sin_wave1.size * 0.01)
+        slope = (numpy.arange(fade_len)) / fade_len
+        sin_wave1[:fade_len] = sin_wave1[:fade_len] * slope
+        fade_len = int(sin_wave1.size * 0.4)
+        slope = ((fade_len - 1) - numpy.arange(fade_len)) / fade_len
+        sin_wave1[-fade_len:] = sin_wave1[-fade_len:] * slope
 
         # int16に変換
+        sin_list1 = list(sin_wave1)
         sin_wave2 = numpy.array(sin_list1, dtype=numpy.int16)
 
         return sin_wave2
@@ -108,8 +113,9 @@ class Wav:
             self.__log.warning('fix: vol=%s', vol)
 
         snd = pygame.sndarray.make_sound(self.wav)
-        maxtime = int(self._sec * 950)
+        # maxtime = int(self._sec * 950)
 
         snd.set_volume(vol)
-        snd.play(fade_ms=20, maxtime=maxtime)
+        # snd.play(fade_ms=20, maxtime=maxtime)
+        snd.play()
         time.sleep(self._sec)
