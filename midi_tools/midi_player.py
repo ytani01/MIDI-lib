@@ -20,7 +20,7 @@ class Player:
     """
     MIDI parser for Music Box
     """
-    DEF_RATE = 11025  # Hz .. sampling rate
+    DEF_RATE = 22050  # Hz .. sampling rate
 
     SEC_MIN = 0.02  # sec
     SEC_MAX = 1.20  # sec
