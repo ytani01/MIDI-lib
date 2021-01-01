@@ -8,6 +8,8 @@ __author__ = 'Yoichi Tanibayashi'
 __date__ = '2020'
 
 import time
+import threading
+import queue
 import pygame
 from .wav_utils import Wav
 from .midi_utils import note2freq
@@ -109,6 +111,26 @@ class Player:
         # snd.play(fade_ms=5, maxtime=maxtime)
         snd.play()
 
+    def play_th(self, note_q, sec_min, sec_max):
+        """
+        play thread
+        """
+        my_clock_base = -1
+
+        while True:
+            note_info = note_q.get()
+
+            if not note_info:
+                break
+
+            if my_clock_base < 0:
+                my_clock_base = time.time() - note_info.abs_time
+
+            now = time.time() - my_clock_base
+
+            self.play_sound(note_info, sec_min, sec_max)
+            print('%08.3f/%s' % (now, note_info))
+
     def play(self, parsed_midi, sec_min=SEC_MIN, sec_max=SEC_MAX) -> None:
         """
         play parsed midi data
@@ -134,6 +156,17 @@ class Player:
 
         abs_time = 0
 
+        note_q = queue.Queue()
+
+        th = threading.Thread(target=self.play_th,
+                              args=(note_q, sec_min, sec_max),
+                              daemon=True)
+        th.start()
+
+        my_clock_base = -1.0
+        now = 0.0
+        clock_delay = 0.0
+
         for i, note_info in enumerate(data):
             self.__log.debug('(%4d) %s', i, note_info)
 
@@ -141,7 +174,21 @@ class Player:
             self.__log.debug('delay=%s', delay)
 
             if delay > 0:
+                delay -= clock_delay  # time adjustment
+                if delay <= 0:
+                    delay = 0.001
+
                 time.sleep(delay)
+
+            # calc clock_delay
+            if my_clock_base < 0:
+                my_clock_base = time.time() - note_info.abs_time
+
+            now = time.time() - my_clock_base
+
+            clock_delay = now - note_info.abs_time
+            self.__log.debug('%8.3f/%8.3f clock_delay=%s',
+                             now, note_info.abs_time, clock_delay)
 
             abs_time = note_info.abs_time
             self.__log.debug('abs_time=%s', abs_time)
@@ -149,7 +196,10 @@ class Player:
             if note_info.velocity == 0:
                 continue
 
-            self.play_sound(note_info, sec_min, sec_max)
-            print('(%4d) %s' % (i, note_info))
+            note_q.put(note_info)
 
+        note_q.put(None)
+        th.join()
         time.sleep(.5)
+
+    print('end music')
