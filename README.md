@@ -1,12 +1,13 @@
 # MIDI-lib
 
-MIDI tools: Parser, Player, etc.
+Simple MIDI library: Parser, Player, etc.
 
-Python用MIDIライブラリ ``Mido`` を使って、
-より使いやすい形にパージングする。
+Python向け MIDIライブラリ ``Mido`` を使って、
+より使いやすい形にパージングするライブラリです。
 
-簡単なプレーヤー、wav形式の音源ファイル作成ツール付き。
+簡単なプレーヤー、wav形式の音源ファイル作成機能などもあります。
 
+特徴
 * 全トラックを合成
 * channelを選択することが可能
 * (イベント単位ではなく) note単位で解析
@@ -64,7 +65,7 @@ pl.play(parsed_data)
 パージングする関数
 ```bash
 (env1)$ python3 -m pydoc midilib.Parser.parse
-````
+```
 
 パージング結果を受けて音楽を再生する関数
 ```bash
@@ -90,7 +91,8 @@ parsed_data = {
 }
 ```
 
-パージング結果に含まれているノート情報(parsed_data['note_info'])
+パージング結果に含まれているノート情報
+(parsed_data['note_info'])
 ```bash
 (env1)$ python3 -m pydoc midilib.NoteInfo
 ```

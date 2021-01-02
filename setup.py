@@ -14,13 +14,13 @@ with open("README.md") as f:
 
 setup(
     name='midilib',
-    version='0.0.1',
+    version='0.0.2',
     description='Simple MIDI library',
     long_description=long_description,
     long_description_content_type="text/markdown",
     author='Yoichi Tanibayashi',
     author_email='yoichi@tanibayashi.jp',
-    url='https://github.com/ytani01/MIDI-utils/',
+    url='https://github.com/ytani01/MIDI-lib/',
     license='MIT',
     classifiers=[
         "Development Status :: 3 - Alpha",
