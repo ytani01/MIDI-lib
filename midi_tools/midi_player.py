@@ -25,8 +25,6 @@ class Player:
     SEC_MIN = 0.02  # sec
     SEC_MAX = 1.20  # sec
 
-    __log = get_logger(__name__, False)
-
     def __init__(self, rate=DEF_RATE, debug=False):
         """ Constructor
 

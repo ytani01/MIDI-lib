@@ -30,8 +30,6 @@ class NoteInfo:
     end_time: float
         sec >= abs_time >= 0
     """
-    __log = get_logger(__name__, True)
-
     def __init__(self,  # pylint: disable=too-many-arguments
                  abs_time=None, channel=None, note=None,
                  velocity=None, end_time=None, debug=False):
@@ -79,8 +77,6 @@ class Parser:
     """
     MIDI parser
     """
-    __log = get_logger(__name__, False)
-
     def __init__(self, debug=False):
         """ Constructor
 

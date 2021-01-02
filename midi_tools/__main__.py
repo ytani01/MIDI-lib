@@ -12,8 +12,6 @@ from .my_logger import get_logger
 
 class MidiApp:  # pylint: disable=too-many-instance-attributes
     """ MidiApp """
-    __log = get_logger(__name__, False)
-
     def __init__(self, midi_file, # pylint: disable=too-many-arguments
                  channel,
                  parse_only=False,
@@ -64,9 +62,6 @@ class MidiApp:  # pylint: disable=too-many-instance-attributes
 
 class WavApp:
     """ WavApp """
-
-    __log = get_logger(__name__, False)
-
     def __init__(self, # pylint: disable=too-many-arguments
                  freq, outfile, vol, sec, rate=Wav.DEF_RATE,
                  debug=False) -> None:
