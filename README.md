@@ -61,17 +61,23 @@ pl.play(parsed_data)
 
 ### 2.1 API
 
-```bash
 パージングする関数
+```bash
 (env1)$ python3 -m pydoc midilib.Parser.parse
+````
 
 パージング結果を受けて音楽を再生する関数
+```bash
 (env1)$ python3 -m pydoc midilib.Player.play
+```
 
 指定されてた周波数の音源データを作成し、wav形式で保存
+```bash
 (env1)$ python3 -m pydoc midilib.Wav
+```
 
 ノート番号を周波数に変換する関数
+```bash
 (env1)$ python3 -m pytoc midilib.note2freq
 ```
 
