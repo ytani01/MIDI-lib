@@ -1,8 +1,8 @@
-# MIDI-utils
+# MIDI-lib
 
 MIDI tools: Parser, Player, etc.
 
-MIDIライブラリ ``mido`` を使って、
+Python用MIDIライブラリ ``Mido`` を使って、
 より使いやすい形にパージングする。
 
 簡単なプレーヤー、wav形式の音源ファイル作成ツール付き。
@@ -32,45 +32,46 @@ $ . ./bin/activate
 
 Execute parser
 ```bash
-(env1)$ python -m miditools parse midi_file
+(env1)$ python -m midilib parse midi_file
 ```
 
 Execute player
 ```bash
-(env1)$ python -m miditools play midi_file
+(env1)$ python -m midilib play midi_file
 ```
+
+Sample program
+```python
+#!/usr/bin/env python3
+
+import sys
+from midilib import *
+
+midi_file = sys.argv[1]
+pa = Parser()
+pl = Player()
+
+data = pa.parse(midi_file)
+
+pl.play(data)
+```
+
 
 ## 2. for detail
 
 ### 2.1 API
 
 ```bash
-(env1)$ python3 -m pydoc miditools.Parser.parse
-(env1)$ python3 -m pydoc miditools.Player.play
-(env1)$ python3 -m pydoc miditools.Wav
+(env1)$ python3 -m pydoc midilib.Parser.parse
+(env1)$ python3 -m pydoc midilib.Player.play
+(env1)$ python3 -m pydoc midilib.Wav
+(env1)$ python3 -m pytoc midilib.note2freq
 ```
 
 ### 2.2 parsed data
 
 ```bash
-(env1)$ python3 -m pydoc miditools.NoteInfo
-```
-
-## 3. Sample program
-
-sample_player.py
-```python
-#!/usr/bin/env python3
-
-import sys
-from miditools import *
-
-pa = Parser()
-pl = Player()
-
-data = pa.parse(sys.argv[1])
-
-pl.play(data)
+(env1)$ python3 -m pydoc midilib.NoteInfo
 ```
 
 

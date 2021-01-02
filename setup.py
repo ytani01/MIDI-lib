@@ -13,9 +13,9 @@ with open("README.md") as f:
     long_description =f.read()
 
 setup(
-    name='miditools',
-    version='0.0.3',
-    description='MIDI tools',
+    name='midilib',
+    version='0.0.1',
+    description='Simple MIDI library',
     long_description=long_description,
     long_description_content_type="text/markdown",
     author='Yoichi Tanibayashi',
@@ -24,7 +24,6 @@ setup(
     license='MIT',
     classifiers=[
         "Development Status :: 3 - Alpha",
-        "Natural Language :: Japanese"
     ],
     install_requires=read_requirements(),
     packages=find_packages(exclude=('tests', 'docs')),
