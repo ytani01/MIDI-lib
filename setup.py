@@ -9,11 +9,15 @@ def read_requirements():
         requirements = [line.rstrip() for line in f]
     return requirements
 
+with open("README.md") as f:
+    long_description =f.read()
+
 setup(
     name='miditools',
-    version='0.0.2',
+    version='0.0.3',
     description='MIDI tools',
-    long_description='MIDI Parser, Player, Wav tools',
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     author='Yoichi Tanibayashi',
     author_email='yoichi@tanibayashi.jp',
     url='https://github.com/ytani01/MIDI-utils/',
@@ -23,5 +27,6 @@ setup(
         "Natural Language :: Japanese"
     ],
     install_requires=read_requirements(),
-    packages=['miditools']
+    packages=find_packages(exclude=('tests', 'docs')),
+    python_requires='>=3.7',
 )

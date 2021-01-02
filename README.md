@@ -1,21 +1,18 @@
 # MIDI-utils
 
-MIDI utilities and test programs
+MIDI tools: Parser, Player, etc.
 
-midoを使って、より使いやすい形にパージングする。
+MIDIライブラリ ``mido`` を使って、
+より使いやすい形にパージングする。
+
+簡単なプレーヤー、wav形式の音源ファイル作成ツール付き。
 
 * 全トラックを合成
 * channelを選択することが可能
-* イベント単位では無く、note単位で解析
+* (イベント単位ではなく) note単位で解析
 * note毎に、開始時刻と終了時刻を絶対時間(曲の開始からの秒数)で算出
 * noteの情報(`NoteInfo`)は、
   `print()` や `str()` で簡単に内容を確認できる
-
-
-## ToDo
-
-* Player.play()で、
-  時間を監視して、ズレをより少なくする。
 
 
 ## 1. TL;DR
@@ -28,17 +25,19 @@ $ cd env1
 $ git clone https://github.com/ytani01/MIDI-utils.git
 $ cd MIDI-utils
 $ . ./bin/activate
+(env1)$ pip install -U pip setuptools wheel
+(env1)$ hash -r
 (env1)$ pip install .
 ```
 
 Execute parser
 ```bash
-$ python -m midi_tools parse midi_file
+(env1)$ python -m miditools parse midi_file
 ```
 
 Execute player
 ```bash
-$ python -m midi_tools play midi_file
+(env1)$ python -m miditools play midi_file
 ```
 
 ## 2. for detail
@@ -46,14 +45,15 @@ $ python -m midi_tools play midi_file
 ### 2.1 API
 
 ```bash
-python3 -m pydoc midi_tools.Parser.parse
-python3 -m pydoc midi_tools.Player.play
+(env1)$ python3 -m pydoc miditools.Parser.parse
+(env1)$ python3 -m pydoc miditools.Player.play
+(env1)$ python3 -m pydoc miditools.Wav
 ```
 
 ### 2.2 parsed data
 
 ```bash
-python3 -m pydoc midi_tools.NoteInfo
+(env1)$ python3 -m pydoc miditools.NoteInfo
 ```
 
 ## 3. Sample program
@@ -63,12 +63,13 @@ sample_player.py
 #!/usr/bin/env python3
 
 import sys
-from midi_tools import *
+from miditools import *
 
 pa = Parser()
 pl = Player()
 
 data = pa.parse(sys.argv[1])
+
 pl.play(data)
 ```
 
