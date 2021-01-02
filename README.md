@@ -16,30 +16,7 @@ Python向け MIDIライブラリ ``Mido`` を使って、
   `print()` や `str()` で簡単に内容を確認できる
 
 
-## 1. TL;DR
-
-Install
-```bash
-$ cd ~
-$ python3 -m venv env1
-$ cd env1
-$ . ./bin/activate
-(env1)$ git clone https://github.com/ytani01/MIDI-utils.git
-(env1)$ cd MIDI-utils
-(env1)$ pip install -U pip setuptools wheel
-(env1)$ hash -r
-(env1)$ pip install .
-```
-
-Execute parser
-```bash
-(env1)$ python -m midilib parse midi_file
-```
-
-Execute player
-```bash
-(env1)$ python -m midilib play midi_file
-```
+## TL;DR
 
 Sample program
 ```python
@@ -57,10 +34,36 @@ parsed_data = pa.parse(midi_file)
 pl.play(parsed_data)
 ```
 
+## 1. Install
 
-## 2. for detail
+```bash
+$ cd ~
+$ python3 -m venv env1
+$ cd env1
+$ . ./bin/activate
+(env1)$ git clone https://github.com/ytani01/MIDI-utils.git
+(env1)$ cd MIDI-utils
+(env1)$ pip install -U pip setuptools wheel
+(env1)$ hash -r
+(env1)$ pip install .
+```
 
-### 2.1 API
+## 2. デモ実行
+
+### 2.1 Execute parser
+```bash
+(env1)$ python -m midilib parse midi_file
+```
+
+### 2.2 Execute player
+```bash
+(env1)$ python -m midilib play midi_file
+```
+
+
+## 3. for detail
+
+### 3.1 API
 
 パージングする関数
 ```bash
@@ -82,7 +85,7 @@ pl.play(parsed_data)
 (env1)$ python3 -m pytoc midilib.note2freq
 ```
 
-### 2.2 parsed data
+### 3.2 parsed data
 
 ```
 parsed_data = {
