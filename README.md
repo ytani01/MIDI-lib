@@ -28,7 +28,7 @@ $ cd env1
 $ git clone https://github.com/ytani01/MIDI-utils.git
 $ cd MIDI-utils
 $ . ./bin/activate
-(env1)$ pip install -r requirements.txt
+(env1)$ pip install .
 ```
 
 Execute parser
