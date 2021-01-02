@@ -4,17 +4,6 @@
 #
 """
 Make sound
-
-### Install
-
-(1) Linux packages
-
-$ apt install portaudio2
-
-(2) Python packages
-
-$ pip install -U numpy sounddevice
-
 """
 __author__ = 'Yoichi Tanibayashi'
 __date__   = '2020'
@@ -48,8 +37,6 @@ class SampleApp:
 
     DEF_RATE = 44100  # Hz
 
-    __log = get_logger(__name__, False)
-
     def __init__(self, midi_file, debug=False):
         """constructor
 
@@ -57,7 +44,7 @@ class SampleApp:
         ----------
         """
         self._dbg = debug
-        __class__.__log = get_logger(__class__.__name__, self._dbg)
+        self.__log = get_logger(__class__.__name__, self._dbg)
         self.__log.debug('midi_file=%s', midi_file)
 
         self._midi_file = midi_file
