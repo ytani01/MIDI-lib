@@ -98,7 +98,6 @@ class Wav:
         Parameters
         ----------
         vol: float
-        blocking: bool
         """
         self.__log.debug('vol=%s', vol)
 

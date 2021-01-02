@@ -75,7 +75,7 @@ $ . ./bin/activate
 (env1)$ python3 -m pydoc midilib.Player.play
 ```
 
-指定されてた周波数の音源データを作成し、wav形式で保存
+指定されてた周波数の音源データ(wav形式)を作成/再生/保存するクラス
 ```bash
 (env1)$ python3 -m pydoc midilib.Wav
 ```
