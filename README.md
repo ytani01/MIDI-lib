@@ -22,9 +22,9 @@ Install
 $ cd ~
 $ python3 -m venv env1
 $ cd env1
-$ git clone https://github.com/ytani01/MIDI-utils.git
-$ cd MIDI-utils
 $ . ./bin/activate
+(env1)$ git clone https://github.com/ytani01/MIDI-utils.git
+(env1)$ cd MIDI-utils
 (env1)$ pip install -U pip setuptools wheel
 (env1)$ hash -r
 (env1)$ pip install .
@@ -51,9 +51,9 @@ midi_file = sys.argv[1]
 pa = Parser()
 pl = Player()
 
-data = pa.parse(midi_file)
+parsed_data = pa.parse(midi_file)
 
-pl.play(data)
+pl.play(parsed_data)
 ```
 
 
@@ -62,14 +62,29 @@ pl.play(data)
 ### 2.1 API
 
 ```bash
+パージングする関数
 (env1)$ python3 -m pydoc midilib.Parser.parse
+
+パージング結果を受けて音楽を再生する関数
 (env1)$ python3 -m pydoc midilib.Player.play
+
+指定されてた周波数の音源データを作成し、wav形式で保存
 (env1)$ python3 -m pydoc midilib.Wav
+
+ノート番号を周波数に変換する関数
 (env1)$ python3 -m pytoc midilib.note2freq
 ```
 
 ### 2.2 parsed data
 
+```
+parsed_data = {
+  'channel_set': { 元ファイルに含まれている全チャンネル番号 },
+  'note_info': [ ノート情報のリスト ]
+}
+```
+
+パージング結果に含まれているノート情報(parsed_data['note_info'])
 ```bash
 (env1)$ python3 -m pydoc midilib.NoteInfo
 ```

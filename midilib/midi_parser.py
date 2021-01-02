@@ -243,7 +243,7 @@ class Parser:
         -------
         out_data: {
             'channel_set': set of int,
-            'data': list of NoteInfo
+            'note_info': list of NoteInfo
         }
 
         """
@@ -264,5 +264,5 @@ class Parser:
 
         data3 = self.set_end_time(data2)
 
-        out_data = {'channel_set': self._channel_set, 'data': data3}
+        out_data = {'channel_set': self._channel_set, 'note_info': data3}
         return out_data

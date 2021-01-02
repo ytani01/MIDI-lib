@@ -136,7 +136,10 @@ class Player:
 
         Parameters
         ----------
-        parsed_midi: {'channel_set': set of int, 'data': list of NoteInfo}
+        parsed_data: {
+            'channel_set': set of int,
+            'note_info': list of NoteInfo
+        }
         sec_min: int
             min sound length
         sec_max: int
@@ -145,12 +148,12 @@ class Player:
         self.__log.debug('parsed_midi[channel_set]=%s,',
                          parsed_midi['channel_set'])
         self.__log.debug('length of parsed_midi[data]=%s',
-                         len(parsed_midi['data']))
+                         len(parsed_midi['note_info']))
         self.__log.debug('sec: %s .. %s', sec_min, sec_max)
 
-        data = parsed_midi['data']
+        data = parsed_midi['note_info']
 
-        snd = self.mk_wav(parsed_midi['data'], sec_min, sec_max)
+        snd = self.mk_wav(parsed_midi['note_info'], sec_min, sec_max)
         self.__log.info('len(snd)=%s', len(snd))
 
         abs_time = 0
