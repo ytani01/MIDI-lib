@@ -15,4 +15,5 @@ from .wav_utils import Wav
 
 __all__ = ['FREQ_BASE', 'NOTE_BASE', 'NOTE_N', 'note2freq',
            'Parser', 'NoteInfo',
-           'Player']
+           'Player',
+           'Wav']

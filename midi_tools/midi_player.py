@@ -13,7 +13,7 @@ import queue
 import pygame
 from .wav_utils import Wav
 from .midi_utils import note2freq
-from .MyLogger import get_logger
+from .my_logger import get_logger
 
 
 class Player:
@@ -131,7 +131,8 @@ class Player:
             self.play_sound(note_info, sec_min, sec_max)
             print('%08.3f/%s' % (now, note_info))
 
-    def play(self, parsed_midi, sec_min=SEC_MIN, sec_max=SEC_MAX) -> None:
+    def play(self, parsed_midi,  # pylint: disable=too-many-locals
+             sec_min=SEC_MIN, sec_max=SEC_MAX) -> None:
         """
         play parsed midi data
 
@@ -158,9 +159,10 @@ class Player:
 
         note_q = queue.Queue()
 
-        th = threading.Thread(target=self.play_th,
-                              args=(note_q, sec_min, sec_max),
-                              daemon=True)
+        th = threading.Thread(  # pylint: disable=invalid-name
+            target=self.play_th,
+            args=(note_q, sec_min, sec_max),
+            daemon=True)
         th.start()
 
         my_clock_base = -1.0

@@ -13,7 +13,7 @@ import array
 import time
 import numpy as np
 import pygame
-from .MyLogger import get_logger
+from .my_logger import get_logger
 
 
 class Wav:
@@ -30,8 +30,6 @@ class Wav:
     VOL_MIN = 0.0
     DEF_VOL = 0.25
 
-    __log = get_logger(__name__, False)
-
     def __init__(self, freq, sec=DEF_SEC, rate=DEF_RATE, debug=False):
         """constructor
 
@@ -39,7 +37,7 @@ class Wav:
         ----------
         """
         self._dbg = debug
-        __class__.__log = get_logger(__class__.__name__, self._dbg)
+        self.__log = get_logger(__class__.__name__, self._dbg)
         self.__log.debug('freq,sec,rate=%s', (freq, sec, rate))
 
         self._freq = freq

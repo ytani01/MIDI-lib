@@ -23,12 +23,14 @@ $ ./mu.py file.mid
 __author__ = 'Yoichi Tanibayashi'
 __date__ = '2020'
 
-from .MyLogger import log
+from .my_logger import get_logger
 
 
 FREQ_BASE = 440
 NOTE_BASE = 69
 NOTE_N = 128
+
+LOG = get_logger(__name__)
 
 def note2freq(note):
     """
@@ -42,7 +44,7 @@ def note2freq(note):
     -------
     freq: float
     """
-    log.debug('note=%s', note)
+    LOG.debug('note=%s', note)
 
     freq = FREQ_BASE * 2.0 ** (float(note - NOTE_BASE)/12.0)
     return freq

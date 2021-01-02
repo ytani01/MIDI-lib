@@ -19,7 +19,7 @@ $ pip install -U numpy sounddevice
 __author__ = 'Yoichi Tanibayashi'
 __date__   = '2020'
 
-from MyLogger import get_logger
+from my_logger import get_logger
 
 
 # --- 以下、サンプル ---
@@ -27,8 +27,7 @@ from MyLogger import get_logger
 
 import time
 import pygame
-import MidiUtil
-import WavUtil
+from midi_tools import *
 import CuiUtil
 
 
@@ -69,8 +68,6 @@ class SampleApp:
         self._rate = self.DEF_RATE
 
         self._active = False
-
-        self._mu = MidiUtil.Util(debug=self._dbg)
 
         self._cui = CuiUtil.CuiKey([
             CuiUtil.CuiCmd('12345678', self.play),
@@ -154,14 +151,14 @@ class SampleApp:
         note = self._note_base + offset
         self.__log.debug('note=%s', note)
 
-        freq = self._mu.note2freq(note)
+        freq = note2freq(note)
         self.__log.debug('freq=%s', freq)
 
-        wav = WavUtil.Wav(freq, self._sec, self._rate, debug=self._dbg)
+        wav = Wav(freq, self._sec, self._rate, debug=self._dbg)
 
-        snd = pygame.sndarray.make_sound(wav._wav)
+        snd = pygame.sndarray.make_sound(wav.wav)
         snd.set_volume(self._vol)
-        snd.play(fade_ms=50)
+        snd.play()
 
         print('note:%d, %.2fHz, %.2fsec, vol:%.2f, rate:%s' % (
             note, freq, self._sec, self._vol, self._rate))

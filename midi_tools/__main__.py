@@ -7,7 +7,7 @@ main for midi_tools
 import pygame
 import click
 from . import Parser, Player, Wav
-from .MyLogger import get_logger
+from .my_logger import get_logger
 
 
 class MidiApp:  # pylint: disable=too-many-instance-attributes
