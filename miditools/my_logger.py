@@ -34,8 +34,10 @@ def get_logger(name, dbg=False):
     # isinstance()では、boolもintと判定されるので、
     # 先に bool かどうかを判定する
 
-    if isinstance(dbg, bool) and dbg:
-        logger.setLevel(DEBUG)
+    if isinstance(dbg, bool):
+        if dbg:
+            logger.setLevel(DEBUG)
+
         return logger
 
     if isinstance(dbg, int):
