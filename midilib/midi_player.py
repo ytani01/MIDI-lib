@@ -205,4 +205,4 @@ class Player:
         th.join()
         time.sleep(.5)
 
-    print('end music')
+        print('end music')
