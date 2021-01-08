@@ -24,8 +24,8 @@ __author__ = 'Yoichi Tanibayashi'
 __date__   = '2020'
 
 import copy
-from MidiUtil import Parser
-from MyLogger import get_logger
+from midilib import Parser
+from my_logger import get_logger
 
 
 class MidiPaperTape:
@@ -46,11 +46,13 @@ class MidiPaperTape:
     ============================================================
 
     """
-    CHR_ON = ' '
-    CHR_OFF = '*'
+    MIDI_NOTE_N = 128
 
-    CHR_NOW_ON = 'o'
-    CHR_NOW_OFF = '='
+    CHR_ON = '|'
+    CHR_OFF = ' '
+
+    CH_ON_CHRSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    CH_OFF_CHRSET = 'abcdefghijklmnopqrstuvwxyz'
 
     __log = get_logger(__name__, False)
 
@@ -88,12 +90,12 @@ class MidiPaperTape:
             for d in midi_data:
                 print(d)
 
-        note_min = Parser.NOTE_N - 1
+        note_min = self.MIDI_NOTE_N - 1
         note_max = 0
 
         ch_data = {}
-        on_count = [0] * Parser.NOTE_N
-        prev_ch_data = [self.CHR_OFF] * Parser.NOTE_N
+        on_count = [0] * self.MIDI_NOTE_N
+        prev_ch_data = [self.CHR_OFF] * self.MIDI_NOTE_N
 
         for d in midi_data:
             if d.abs_time not in ch_data.keys():
@@ -106,13 +108,13 @@ class MidiPaperTape:
                 note_max = d.note
 
             if d.velocity > 0:
-                channel_ch = 'abcdefghijklmnopqrstuvwxyz'[d.channel]
+                channel_ch = self.CH_ON_CHRSET[d.channel]
                 ch_data[d.abs_time][d.note] = channel_ch
 
                 on_count[d.note] += 1
                 prev_ch_data[d.note] = self.CHR_ON
             else:
-                channel_ch = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[d.channel]
+                channel_ch = self.CH_OFF_CHRSET[d.channel]
                 ch_data[d.abs_time][d.note] = channel_ch
 
                 on_count[d.note] -= 1
@@ -216,16 +218,25 @@ class SampleApp:
 
         parsed_data = self._parser.parse(self._midi_file, self._channel)
 
-        paper_tape = MidiPaperTape(parsed_data['data'], debug=self._dbg)
+        paper_tape = MidiPaperTape(parsed_data['note_info'],
+                                   debug=self._dbg)
 
         paper_tape.print()
+        print()
+
+        for channel in sorted(list(parsed_data['channel_set'])):
+            ch_on = paper_tape.CH_ON_CHRSET[channel]
+            ch_off = paper_tape.CH_OFF_CHRSET[channel]
+            print('CH[%s]: %s-%s' % (channel, ch_on, ch_off))
+
+        print()
 
         if self._out_file:
             with open(self._out_file, mode='w') as f:
                 # TBD
                 f.write('a')
 
-        self.__log.debug('channel_list=%s', self._parser._channel_list)
+        self.__log.debug('channel_set=%s', parsed_data['channel_set'])
 
         self.__log.debug('done')
 
