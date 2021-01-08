@@ -89,7 +89,8 @@ class WavApp:  # pylint: disable=too-many-instance-attributes
         if self._midi_note_flag:
             note = self._freq
             self._freq = note2freq(note)
-            print('note=%s -> freq=%s' % (note, self._freq))
+            print('MIDI note: %d -> freq = %.3f Hz' % (
+                int(note), self._freq))
 
         pygame.mixer.init(frequency=self._rate, channels=1)
 
