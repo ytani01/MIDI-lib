@@ -25,7 +25,7 @@ class Wav:
         description
     """
     DEF_SEC = 1.0  # sec
-    DEF_RATE = 11025  # Hz
+    DEF_RATE = 44100  # Hz
     VOL_MAX = 1.0
     VOL_MIN = 0.0
     DEF_VOL = 0.25

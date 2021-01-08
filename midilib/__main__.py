@@ -20,7 +20,7 @@ class MidiApp:  # pylint: disable=too-many-instance-attributes
                  debug=False) -> None:
         """ Constructor """
         self._dbg = debug
-        self._log = get_logger(__class__.__name__, self._dbg)
+        self._log = get_logger(self.__class__.__name__, self._dbg)
         self._log.debug('midi_file=%s, channel=%s, parse_only=%s',
                         midi_file, channel, parse_only)
         self._log.debug('rate=%s', rate)
@@ -59,10 +59,12 @@ class MidiApp:  # pylint: disable=too-many-instance-attributes
         do nothing
         """
 
-class WavApp:
+class WavApp:  # pylint: disable=too-many-instance-attributes
     """ WavApp """
     def __init__(self,  # pylint: disable=too-many-arguments
-                 freq, outfile, midi_note, vol, sec, rate=Wav.DEF_RATE,
+                 freq, outfile, midi_note_flag, vol, sec,
+                 rate=Wav.DEF_RATE,
+                 play_flag=True,
                  debug=False) -> None:
         """constructor
 
@@ -72,20 +74,22 @@ class WavApp:
         self._dbg = debug
         self._log = get_logger(__class__.__name__, self._dbg)
         self._log.debug('freq,vol,sec,rate=%s', (freq, vol, sec, rate))
-        self._log.debug('midi_note=%s', midi_note)
         self._log.debug('outfile=%s', outfile)
+        self._log.debug('midi_note_flag=%s', midi_note_flag)
+        self._log.debug('play_flag=%s', play_flag)
 
         self._freq = freq
         self._outfile = outfile
-        self._midi_note = midi_note
+        self._midi_note_flag = midi_note_flag
         self._vol = vol
         self._sec = sec
         self._rate = rate
+        self._play_flag = play_flag
 
-        if self._midi_note:
+        if self._midi_note_flag:
             note = self._freq
             self._freq = note2freq(note)
-            self._log.info('note=%s -> freq=%s', note, self._freq)
+            print('note=%s -> freq=%s' % (note, self._freq))
 
         pygame.mixer.init(frequency=self._rate, channels=1)
 
@@ -98,7 +102,8 @@ class WavApp:
                   self._sec, self._rate,
                   debug=self._dbg)
 
-        wav.play(self._vol)
+        if self._play_flag:
+            wav.play(self._vol)
 
         if self._outfile:  # not empty (C10801)
             wav.save(self._outfile[0])
@@ -129,7 +134,7 @@ def cli(ctx):
         print()
         print(ctx.get_help())
     else:
-        print()
+        pass
 
 
 @cli.command(context_settings=CONTEXT_SETTINGS, help='''
@@ -194,7 +199,7 @@ Wav format sound tool
 ''')
 @click.argument('freq', type=float)
 @click.argument('outfile', type=click.Path(), nargs=-1)
-@click.option('--midi_note', '-n', 'midi_note', is_flag=True,
+@click.option('--midi_note', '-m', 'midi_note_flag', is_flag=True,
               default=False,
               help='FREQ as MIDI note number')
 @click.option('--vol', '-v', 'vol', type=float, default=Wav.DEF_VOL,
@@ -204,20 +209,27 @@ Wav format sound tool
               help='sec [sec], default=%s sec' % Wav.DEF_SEC)
 @click.option('--rate', '-r', 'rate', type=int, default=Wav.DEF_RATE,
               help='Sampling reate, default=%s Hz' % Wav.DEF_RATE)
+@click.option('--dont_play', '-n', 'dont_play', is_flag=True,
+              default=False,
+              help='dont\'t play flag')
 @click.option('--debug', '-d', 'debug', is_flag=True, default=False,
               help='debug flag')
 def wav(freq, outfile,  # pylint: disable=too-many-arguments
-        midi_note,
+        midi_note_flag,
         vol, sec, rate,
+        dont_play,
         debug):
     """サンプル起動用メイン関数
     """
     _log = get_logger(__name__, debug)
     _log.debug('freq,vol,sec,rate=%s', (freq, vol, sec, rate))
-    _log.debug('midi_note=%s', midi_note)
     _log.debug('outfile=%s', outfile)
+    _log.debug('midi_note_flag=%s', midi_note_flag)
+    _log.debug('dont_play=%s', dont_play)
 
-    app = WavApp(freq, outfile, midi_note, vol, sec, rate, debug=debug)
+    app = WavApp(freq, outfile, midi_note_flag, vol, sec, rate,
+                 play_flag=not dont_play,
+                 debug=debug)
     try:
         app.main()
     finally:

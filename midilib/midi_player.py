@@ -158,7 +158,7 @@ class Player:
 
         abs_time = 0
 
-        note_q = queue.Queue()
+        note_q: queue.Queue = queue.Queue()
 
         th = threading.Thread(  # pylint: disable=invalid-name
             target=self.play_th,
