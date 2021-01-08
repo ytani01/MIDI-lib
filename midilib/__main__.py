@@ -6,13 +6,13 @@ main for midi_tools
 """
 import pygame
 import click
-from . import Parser, Player, Wav
+from . import Parser, Player, Wav, note2freq
 from .my_logger import get_logger
 
 
 class MidiApp:  # pylint: disable=too-many-instance-attributes
     """ MidiApp """
-    def __init__(self, midi_file, # pylint: disable=too-many-arguments
+    def __init__(self, midi_file,  # pylint: disable=too-many-arguments
                  channel,
                  parse_only=False,
                  rate=Player.DEF_RATE,
@@ -20,11 +20,11 @@ class MidiApp:  # pylint: disable=too-many-instance-attributes
                  debug=False) -> None:
         """ Constructor """
         self._dbg = debug
-        self.__log = get_logger(__class__.__name__, self._dbg)
-        self.__log.debug('midi_file=%s, channel=%s, parse_only=%s',
-                         midi_file, channel, parse_only)
-        self.__log.debug('rate=%s', rate)
-        self.__log.debug('sec_min/max=%s/%s', sec_min, sec_max)
+        self._log = get_logger(__class__.__name__, self._dbg)
+        self._log.debug('midi_file=%s, channel=%s, parse_only=%s',
+                        midi_file, channel, parse_only)
+        self._log.debug('rate=%s', rate)
+        self._log.debug('sec_min/max=%s/%s', sec_min, sec_max)
 
         self._midi_file = midi_file
         self._channel = channel
@@ -38,7 +38,7 @@ class MidiApp:  # pylint: disable=too-many-instance-attributes
 
     def main(self) -> None:
         """ main """
-        self.__log.debug('')
+        self._log.debug('')
 
         parsed_data = self._parser.parse(self._midi_file, self._channel)
 
@@ -59,11 +59,10 @@ class MidiApp:  # pylint: disable=too-many-instance-attributes
         do nothing
         """
 
-
 class WavApp:
     """ WavApp """
-    def __init__(self, # pylint: disable=too-many-arguments
-                 freq, outfile, vol, sec, rate=Wav.DEF_RATE,
+    def __init__(self,  # pylint: disable=too-many-arguments
+                 freq, outfile, midi_note, vol, sec, rate=Wav.DEF_RATE,
                  debug=False) -> None:
         """constructor
 
@@ -71,24 +70,31 @@ class WavApp:
         ----------
         """
         self._dbg = debug
-        self.__log = get_logger(__class__.__name__, self._dbg)
-        self.__log.debug('freq,vol,sec,rate=%s', (freq, vol, sec, rate))
-        self.__log.debug('outfile=%s', outfile)
+        self._log = get_logger(__class__.__name__, self._dbg)
+        self._log.debug('freq,vol,sec,rate=%s', (freq, vol, sec, rate))
+        self._log.debug('midi_note=%s', midi_note)
+        self._log.debug('outfile=%s', outfile)
 
         self._freq = freq
         self._outfile = outfile
+        self._midi_note = midi_note
         self._vol = vol
         self._sec = sec
         self._rate = rate
+
+        if self._midi_note:
+            note = self._freq
+            self._freq = note2freq(note)
+            self._log.info('note=%s -> freq=%s', note, self._freq)
 
         pygame.mixer.init(frequency=self._rate, channels=1)
 
     def main(self):
         """main
         """
-        self.__log.debug('')
+        self._log.debug('')
 
-        wav = Wav(self._freq, # pylint: disable=redefined-outer-name
+        wav = Wav(self._freq,  # pylint: disable=redefined-outer-name
                   self._sec, self._rate,
                   debug=self._dbg)
 
@@ -97,14 +103,14 @@ class WavApp:
         if self._outfile:  # not empty (C10801)
             wav.save(self._outfile[0])
 
-        self.__log.debug('done')
+        self._log.debug('done')
 
     def end(self):
         """
         Call at the end of program.
         """
-        self.__log.debug('doing ..')
-        self.__log.debug('done')
+        self._log.debug('doing ..')
+        self._log.debug('done')
 
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
@@ -121,12 +127,8 @@ def cli(ctx):
 
     if subcmd is None:
         print()
-        print('Please specify subcommand')
-        print()
         print(ctx.get_help())
     else:
-        print()
-        print('midi_tools command = %s' % subcmd)
         print()
 
 
@@ -192,6 +194,9 @@ Wav format sound tool
 ''')
 @click.argument('freq', type=float)
 @click.argument('outfile', type=click.Path(), nargs=-1)
+@click.option('--midi_note', '-n', 'midi_note', is_flag=True,
+              default=False,
+              help='FREQ as MIDI note number')
 @click.option('--vol', '-v', 'vol', type=float, default=Wav.DEF_VOL,
               help='volume <= %s, default=%s' % (
                   Wav.VOL_MAX, Wav.DEF_VOL))
@@ -201,22 +206,24 @@ Wav format sound tool
               help='Sampling reate, default=%s Hz' % Wav.DEF_RATE)
 @click.option('--debug', '-d', 'debug', is_flag=True, default=False,
               help='debug flag')
-def wav(freq, outfile, # pylint: disable=too-many-arguments
+def wav(freq, outfile,  # pylint: disable=too-many-arguments
+        midi_note,
         vol, sec, rate,
         debug):
     """サンプル起動用メイン関数
     """
-    __log = get_logger(__name__, debug)
-    __log.debug('freq,vol,sec,rate=%s', (freq, vol, sec, rate))
-    __log.debug('outfile=%s', outfile)
+    _log = get_logger(__name__, debug)
+    _log.debug('freq,vol,sec,rate=%s', (freq, vol, sec, rate))
+    _log.debug('midi_note=%s', midi_note)
+    _log.debug('outfile=%s', outfile)
 
-    app = WavApp(freq, outfile, vol, sec, rate, debug=debug)
+    app = WavApp(freq, outfile, midi_note, vol, sec, rate, debug=debug)
     try:
         app.main()
     finally:
-        __log.debug('finally')
+        _log.debug('finally')
         app.end()
 
 
 if __name__ == '__main__':
-    cli()  # pylint: disable=no-value-for-parameter
+    cli(prog_name='python -m midilib')  # pylint: disable=no-value-for-parameter
