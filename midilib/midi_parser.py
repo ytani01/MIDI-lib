@@ -6,7 +6,7 @@
 MIDI parser
 """
 __author__ = 'Yoichi Tanibayashi'
-__date__ = '2020'
+__date__ = '2021/01'
 
 import copy
 import mido  # pylint: disable=import-error
@@ -250,36 +250,103 @@ class Parser:
         }
         return out_data
 
+    def mk_event_list(self, data):
+        """
+        Parameters
+        ----------
+        data: list of NoteInfo
+
+        Returns
+        -------
+        sorted_ev: list of NoteEvent
+        """
+        ev = []
+
+        for i, ni in enumerate(data):
+            if ni.velocity == 0:
+                continue
+
+            ev.append({
+                'abs_time': ni.abs_time,
+                'event': [{'note': ni.note,
+                           'channel': ni.channel,
+                           'velocity': ni.velocity}]
+            })
+            ev.append({
+                'abs_time': ni.end_time,
+                'event': [{'note': ni.note,
+                           'channel': ni.channel,
+                           'velocity': 0}]
+            })
+
+        sorted_ev = sorted(ev, key=lambda x: x['abs_time'])
+
+        merged_ev = []
+        abs_time = -1
+        for ev in sorted_ev:
+            if ev['abs_time'] != abs_time:
+                merged_ev.append(ev)
+                abs_time = ev['abs_time']
+                continue
+
+            merge_flag = False
+            for e1 in merged_ev[-1]['event']:
+                if e1['note'] == ev['event'][0]['note']:
+                    merge_flag = True
+                    break
+
+            if merge_flag:
+                merged_ev.append(ev)
+                continue
+
+            merged_ev[-1]['event'].append(ev['event'][0])
+
+        return merged_ev
+
     def mk_visual(self, data):
         """
         Parameters
         ----------
         data: list of NoteInfo
         """
+        ev = self.mk_event_list(data)
+
         note_min = self.MIDI_NOTE_N - 1
         note_max = 0
 
-        v_data = {}  # {abs_time0: '...', abs_time1: '...', ...}
+        v_data = []
         prev_chr_list = [self.V_CHR_OFF] * self.MIDI_NOTE_N
+        on_count = [0] * self.MIDI_NOTE_N
+        
+        for e in ev:
+            v_data.append({'abs_time': e['abs_time'],
+                           'chr': copy.deepcopy(prev_chr_list)})
 
-        for d in data:
-            if d.abs_time not in v_data.keys():
-                v_data[d.abs_time] = copy.deepcopy(prev_chr_list)
+            for e1 in e['event']:
+                note = e1['note']
+                
+                note_min = min(note, note_min)
+                note_max = max(note, note_max)
 
-            note_min = min(d.note, note_min)
-            note_max = max(d.note, note_max)
+                if e1['velocity'] > 0:
+                    ch1 = self.V_CHR_START[e1['channel']]
+                    on_count[note] += 1
+                    ch2 = self.V_CHR_ON
+                else:
+                    ch1 = self.V_CHR_STOP[e1['channel']]
+                    on_count[note] -= 1
+                    if on_count[note] > 0:
+                        ch2 = self.V_CHR_ON
+                    else:
+                        ch2 = self.V_CHR_OFF
 
-            if d.velocity > 0:
-                v_data[d.abs_time][d.note] = self.V_CHR_START[d.channel]
-                prev_chr_list[d.note] = self.V_CHR_ON
-            else:
-                v_data[d.abs_time][d.note] = self.V_CHR_STOP[d.channel]
-                prev_chr_list[d.note] = self.V_CHR_OFF
+                v_data[-1]['chr'][note] = ch1
+                prev_chr_list[note] = ch2
 
         self._log.debug('note_min/max=%s', (note_min, note_max))
 
-        for k in sorted(v_data.keys()):
-            v_data[k] = ''.join(v_data[k][note_min:note_max+1])
+        for v_ent in v_data:
+            v_ent['chr'] = ''.join(v_ent['chr'][note_min:note_max+1])
 
         out_data = {
             'note_min': note_min,
@@ -311,8 +378,8 @@ class Parser:
 
         print('--------+' + '-' * (note_max - note_min + 1) + '+')
 
-        for abs_time in v_data['data'].keys():
-            print('%08.3f|%s|' % (abs_time, v_data['data'][abs_time]))
+        for v_ent in v_data['data']:
+            print('%08.3f|%s|' % (v_ent['abs_time'], v_ent['chr']))
 
         print('--------+' + '-' * (note_max - note_min + 1) + '+')
 

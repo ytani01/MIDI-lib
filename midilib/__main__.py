@@ -159,7 +159,7 @@ MIDI parser
 @click.option('--channel', '-c', 'channel', type=int, multiple=True,
               help='MIDI channel')
 @click.option('--visual', '-v', 'visual_flag', is_flag=True,
-              default=True,
+              default=False,
               help='Visual flag')
 @click.option('--debug', '-d', 'dbg', is_flag=True, default=False,
               help='debug flag')
