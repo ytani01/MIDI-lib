@@ -130,6 +130,7 @@ class Player:
             print('%08.3f/%s' % (now, note_info))
 
     def play(self, parsed_midi,  # pylint: disable=too-many-locals
+             pos_sec=0.0,
              sec_min=SEC_MIN, sec_max=SEC_MAX) -> None:
         """
         play parsed midi data
@@ -140,6 +141,8 @@ class Player:
             'channel_set': set of int,
             'note_info': list of NoteInfo
         }
+        pos_sec: float
+            seek position in sec
         sec_min: int
             min sound length
         sec_max: int
@@ -149,6 +152,7 @@ class Player:
                          parsed_midi['channel_set'])
         self.__log.debug('length of parsed_midi[data]=%s',
                          len(parsed_midi['note_info']))
+        self.__log.debug('pos_sec=%s', pos_sec)
         self.__log.debug('sec: %s .. %s', sec_min, sec_max)
 
         data = parsed_midi['note_info']
@@ -171,6 +175,9 @@ class Player:
         clock_delay = 0.0
 
         for i, note_info in enumerate(data):
+            if note_info.abs_time < pos_sec:
+                continue
+
             self.__log.debug('(%4d) %s', i, note_info)
 
             delay = note_info.abs_time - abs_time

@@ -17,6 +17,7 @@ class MidiApp:  # pylint: disable=too-many-instance-attributes
                  parse_only=False,
                  rate=Player.DEF_RATE,
                  sec_min=Player.SEC_MIN, sec_max=Player.SEC_MAX,
+                 pos_sec=0,
                  debug=False) -> None:
         """ Constructor """
         self._dbg = debug
@@ -25,6 +26,7 @@ class MidiApp:  # pylint: disable=too-many-instance-attributes
                         midi_file, channel, parse_only)
         self._log.debug('rate=%s', rate)
         self._log.debug('sec_min/max=%s/%s', sec_min, sec_max)
+        self._log.debug('pos_sec=%s', pos_sec)
 
         self._midi_file = midi_file
         self._channel = channel
@@ -32,6 +34,7 @@ class MidiApp:  # pylint: disable=too-many-instance-attributes
         self._rate = rate
         self._sec_min = sec_min
         self._sec_max = sec_max
+        self._pos_sec = pos_sec
 
         self._parser = Parser(debug=self._dbg)
         self._player = Player(rate=self._rate, debug=self._dbg)
@@ -43,7 +46,7 @@ class MidiApp:  # pylint: disable=too-many-instance-attributes
         parsed_data = self._parser.parse(self._midi_file, self._channel)
 
         if self._dbg or self._parse_only:
-            for i, data in enumerate(parsed_data['data']):
+            for i, data in enumerate(parsed_data['note_info']):
                 print('(%4d) %s' % (i, data))
 
             print('channel_set=', parsed_data['channel_set'])
@@ -51,13 +54,15 @@ class MidiApp:  # pylint: disable=too-many-instance-attributes
         if self._parse_only:
             return
 
-        self._player.play(parsed_data, self._sec_min, self._sec_max)
+        self._player.play(parsed_data, self._pos_sec,
+                          self._sec_min, self._sec_max)
 
     def end(self) -> None:
         """ end
 
         do nothing
         """
+
 
 class WavApp:  # pylint: disable=too-many-instance-attributes
     """ WavApp """
@@ -165,6 +170,8 @@ def parse(midi_file, channel, dbg) -> None:
 MIDI player
 ''')
 @click.argument('midi_file', type=click.Path(exists=True))
+@click.option('--pos_sec', '-s', 'pos_sec', type=float, default=0,
+              help='seek position in sec')
 @click.option('--channel', '-c', 'channel', type=int, multiple=True,
               help='MIDI channel')
 @click.option('--rate', '-r', 'rate', type=int,
@@ -179,14 +186,14 @@ MIDI player
 @click.option('--debug', '-d', 'dbg', is_flag=True, default=False,
               help='debug flag')
 def play(midi_file,  # pylint: disable=too-many-arguments
-         channel, rate, sec_min, sec_max, dbg) -> None:
+         pos_sec, channel, rate, sec_min, sec_max, dbg) -> None:
     """
     player main
     """
     log = get_logger(__name__, dbg)
 
     app = MidiApp(midi_file, channel, parse_only=False, rate=rate,
-                  sec_min=sec_min, sec_max=sec_max,
+                  sec_min=sec_min, sec_max=sec_max, pos_sec=pos_sec,
                   debug=dbg)
     try:
         app.main()
@@ -239,4 +246,4 @@ def wav(freq, outfile,  # pylint: disable=too-many-arguments
 
 
 if __name__ == '__main__':
-    cli(prog_name='python -m midilib')  # pylint: disable=no-value-for-parameter
+    cli(prog_name='python -m midilib')
