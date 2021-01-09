@@ -41,8 +41,8 @@ $ cd ~
 $ python3 -m venv env1
 $ cd env1
 $ . ./bin/activate
-(env1)$ git clone https://github.com/ytani01/MIDI-utils.git
-(env1)$ cd MIDI-utils
+(env1)$ git clone https://github.com/ytani01/MIDI-lib.git
+(env1)$ cd MIDI-lib
 (env1)$ pip install -U pip setuptools wheel
 (env1)$ hash -r
 (env1)$ pip install .
