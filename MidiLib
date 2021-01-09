@@ -1,6 +1,8 @@
 #!/bin/sh
 #
-# (c) 2021 Yoichi Tanibayashi
+# ``midilib`` wrapper script
+#
+#    (c) 2021 Yoichi Tanibayashi
 #
 MYNAME=`basename $0`
 BINDIR="$HOME/bin"
