@@ -14,9 +14,10 @@ ENV_FILE="$BINDIR/$PKG_NAME.env"
 
 export PYGAME_HIDE_SUPPORT_PROMPT=hide
 
-if [ -z $VIRTUAL_ENV ]; then
+if [ x$VIRTUAL_ENV != x$VENVDIR ]; then
    if [ -f $VENVDIR/bin/activate ]; then
        . $VENVDIR/bin/activate
+       echo "(VIRTUAL_ENV=$VIRTUAL_ENV)"
    else
        echo
        echo "ERROR(venv): can not activate python3 Virtualenv"

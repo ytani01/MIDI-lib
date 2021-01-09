@@ -15,6 +15,7 @@ class MidiApp:  # pylint: disable=too-many-instance-attributes
     def __init__(self, midi_file,  # pylint: disable=too-many-arguments
                  channel,
                  parse_only=False,
+                 visual_flag=False,
                  rate=Player.DEF_RATE,
                  sec_min=Player.SEC_MIN, sec_max=Player.SEC_MAX,
                  pos_sec=0,
@@ -22,8 +23,10 @@ class MidiApp:  # pylint: disable=too-many-instance-attributes
         """ Constructor """
         self._dbg = debug
         self._log = get_logger(self.__class__.__name__, self._dbg)
-        self._log.debug('midi_file=%s, channel=%s, parse_only=%s',
-                        midi_file, channel, parse_only)
+        self._log.debug('midi_file=%s, channel=%s',
+                        midi_file, channel)
+        self._log.debug('parse_only=%s, visual_flag=%s',
+                        parse_only, visual_flag)
         self._log.debug('rate=%s', rate)
         self._log.debug('sec_min/max=%s/%s', sec_min, sec_max)
         self._log.debug('pos_sec=%s', pos_sec)
@@ -31,6 +34,7 @@ class MidiApp:  # pylint: disable=too-many-instance-attributes
         self._midi_file = midi_file
         self._channel = channel
         self._parse_only = parse_only
+        self._visual_flag = visual_flag
         self._rate = rate
         self._sec_min = sec_min
         self._sec_max = sec_max
@@ -45,11 +49,17 @@ class MidiApp:  # pylint: disable=too-many-instance-attributes
 
         parsed_data = self._parser.parse(self._midi_file, self._channel)
 
+        self._log.debug('parsed_data=')
         if self._dbg or self._parse_only:
             for i, data in enumerate(parsed_data['note_info']):
                 print('(%4d) %s' % (i, data))
 
-            print('channel_set=', parsed_data['channel_set'])
+        print('channel_set=', parsed_data['channel_set'], flush=True)
+
+        if self._visual_flag:
+            v_data = self._parser.mk_visual(parsed_data['note_info'])
+            print()
+            self._parser.print_visual(v_data, parsed_data['channel_set'])
 
         if self._parse_only:
             return
@@ -137,10 +147,8 @@ def cli(ctx):
     subcmd = ctx.invoked_subcommand
 
     if subcmd is None:
-        print()
         print(ctx.get_help())
     else:
-        print()
         pass
 
 
@@ -150,15 +158,19 @@ MIDI parser
 @click.argument('midi_file', type=click.Path(exists=True))
 @click.option('--channel', '-c', 'channel', type=int, multiple=True,
               help='MIDI channel')
+@click.option('--visual', '-v', 'visual_flag', is_flag=True,
+              default=True,
+              help='Visual flag')
 @click.option('--debug', '-d', 'dbg', is_flag=True, default=False,
               help='debug flag')
-def parse(midi_file, channel, dbg) -> None:
+def parse(midi_file, channel, visual_flag, dbg) -> None:
     """
     parser main
     """
     log = get_logger(__name__, dbg)
 
     app = MidiApp(midi_file, channel, parse_only=True,
+                  visual_flag=visual_flag,
                   debug=dbg)
     try:
         app.main()
@@ -193,7 +205,8 @@ def play(midi_file,  # pylint: disable=too-many-arguments
     """
     log = get_logger(__name__, dbg)
 
-    app = MidiApp(midi_file, channel, parse_only=False, rate=rate,
+    app = MidiApp(midi_file, channel, parse_only=False,
+                  visual_flag=False, rate=rate,
                   sec_min=sec_min, sec_max=sec_max, pos_sec=pos_sec,
                   debug=dbg)
     try:

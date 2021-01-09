@@ -60,7 +60,7 @@ fi
 cd_echo $VIRTUAL_ENV
 
 echo "### create $BINDIR/$ENV_FILE"
-echo "VENVDIR=$VIRTUAL_ENV" >> $ENV_FILE
+echo "VENVDIR=$VIRTUAL_ENV" > $ENV_FILE
 echo
 cat $ENV_FILE
 echo

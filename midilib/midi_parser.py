@@ -34,16 +34,15 @@ class NoteInfo:
                  abs_time=None, channel=None, note=None,
                  velocity=None, end_time=None, debug=False):
         self._dbg = debug
-        self.__log = get_logger(__class__.__name__, self._dbg)
-        self.__log.debug('time,ch,note,velo,end=%s',
-                         (abs_time, channel, note, velocity,
-                          end_time))
+        self._log = get_logger(__class__.__name__, self._dbg)
 
-        self.abs_time = abs_time
+        self.abs_time = round(abs_time, 3)
         self.channel = channel
         self.note = note
         self.velocity = velocity
-        self.end_time = end_time
+        self.end_time = None
+        if isinstance(end_time, float):
+            self.end_time = round(end_time, 3)
 
     def __str__(self):
         """
@@ -77,6 +76,14 @@ class Parser:
     """
     MIDI parser
     """
+    MIDI_NOTE_N = 128
+
+    V_CHR_ON = '|'
+    V_CHR_OFF = ' '
+
+    V_CHR_START = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    V_CHR_STOP = 'abcdefghijklmnopqrstuvwxyz'
+
     def __init__(self, debug=False):
         """ Constructor
 
@@ -86,12 +93,11 @@ class Parser:
             file name of MIDI file
         """
         self._dbg = debug
-        self.__log = get_logger(__class__.__name__, self._dbg)
-        self.__log.debug('')
+        self._log = get_logger(__class__.__name__, self._dbg)
 
         self._channel_set = None
 
-    def parse1(self, midi_obj):
+    def parse1(self, midi_obj, channel=None):
         """
         parse MIDI format simply for subsequent parsing step
 
@@ -99,13 +105,16 @@ class Parser:
         ----------
         midi_obj:
             MIDI file obj
+        channel: list of int
+            selected channel
 
         Returns
         -------
         data: list of NoteInfo
 
         """
-        self.__log.debug('midi_obj=%s', midi_obj.__dict__)
+        # self._log.debug('midi_obj=%s', midi_obj.__dict__)
+        # self._log.debug('channel=%s', channel)
 
         merged_tracks = mido.merge_tracks(midi_obj.tracks)
 
@@ -131,57 +140,35 @@ class Parser:
                 continue
 
             if msg.type == 'end_of_track':
-                self.__log.debug(msg.__dict__)
+                self._log.debug(msg.__dict__)
                 break
 
             if msg.type == 'note_off':
+                channel_set.add(msg.channel)
+                if channel and msg.channel not in channel:
+                    continue
+
                 data_ent = NoteInfo(abs_time, msg.channel, msg.note, 0,
                                     debug=self._dbg)
+
                 out_data.append(data_ent)
-                channel_set.add(msg.channel)
 
             if msg.type == 'note_on':
+                channel_set.add(msg.channel)
+                if channel and msg.channel not in channel:
+                    continue
+
                 data_ent = NoteInfo(abs_time, msg.channel, msg.note,
                                     msg.velocity, debug=self._dbg)
                 out_data.append(data_ent)
-                channel_set.add(msg.channel)
 
         return (channel_set, out_data)
-
-    def select_channel(self, in_data, channel=None):
-        """
-        指定されたトラック/チャンネルだけを抽出
-
-        Parameters
-        ----------
-        in_data: list of data_ent
-
-        channel: list of int
-            MIDI channel
-
-        Returns
-        -------
-        out_data: list of NoteInfo
-
-        """
-        self.__log.debug('channel=%s', channel)
-
-        if channel is None or not channel:
-            out_data = copy.deepcopy(in_data)
-            return out_data
-
-        out_data = []
-        for data in in_data:
-            if data.channel in channel:
-                out_data.append(data)
-
-        return out_data
 
     def set_end_time(self, in_data):
         """
         set end time of NoteInfo
         """
-        self.__log.debug('')
+        self._log.debug('')
 
         out_data = copy.deepcopy(in_data)
         note_start = {}
@@ -196,7 +183,7 @@ class Parser:
                 else:
                     note_start[key] = [i]
 
-                self.__log.debug('note_start=%s', note_start)
+                # self._log.debug('note_start=%s', note_start)
                 continue
 
             # velocity == 0
@@ -207,24 +194,24 @@ class Parser:
                 idx2 = note_start[key].pop(0)
             except KeyError as ex:
                 msg = '%s:%s .. ignored' % (type(ex).__name__, ex)
-                self.__log.warning(msg)
+                self._log.warning(msg)
                 continue
 
-            self.__log.debug('%s, %s, %s', key, note_start[key], idx2)
+            # self._log.debug('%s, %s, %s', key, note_start[key], idx2)
 
             out_data[idx2].end_time = ent.abs_time
 
             if not note_start[key]:
                 note_start.pop(key)
 
-            self.__log.debug('note_start=%s', note_start)
+            # self._log.debug('note_start=%s', note_start)
 
         for k in note_start:
             for idx in note_start[k]:
                 if ent:
                     out_data[idx].end_time = ent.abs_time
 
-        self.__log.debug('note_start=%s', note_start)
+        # self._log.debug('note_start=%s', note_start)
 
         return out_data
 
@@ -247,22 +234,97 @@ class Parser:
         }
 
         """
-        self.__log.debug('midi_file=%s, channel=%s', midi_file, channel)
+        self._log.debug('midi_file=%s, channel=%s', midi_file, channel)
 
         midi_obj = mido.MidiFile(midi_file)
 
-        self._channel_set, data1 = self.parse1(midi_obj)
+        self._channel_set, data1 = self.parse1(midi_obj, channel)
 
-        if self._dbg:
-            self.__log.debug('data1=')
-            for data in data1:
-                print(data)
+        self._log.debug('channel_set=%s', self._channel_set)
 
-        self.__log.debug('channel_set=%s', self._channel_set)
+        data2 = self.set_end_time(data1)
 
-        data2 = self.select_channel(data1, channel)
-
-        data3 = self.set_end_time(data2)
-
-        out_data = {'channel_set': self._channel_set, 'note_info': data3}
+        out_data = {
+            'channel_set': self._channel_set,
+            'note_info': data2
+        }
         return out_data
+
+    def mk_visual(self, data):
+        """
+        Parameters
+        ----------
+        data: list of NoteInfo
+        """
+        note_min = self.MIDI_NOTE_N - 1
+        note_max = 0
+
+        v_data = {}  # {abs_time0: '...', abs_time1: '...', ...}
+        prev_chr_list = [self.V_CHR_OFF] * self.MIDI_NOTE_N
+
+        for d in data:
+            if d.abs_time not in v_data.keys():
+                v_data[d.abs_time] = copy.deepcopy(prev_chr_list)
+
+            note_min = min(d.note, note_min)
+            note_max = max(d.note, note_max)
+
+            if d.velocity > 0:
+                v_data[d.abs_time][d.note] = self.V_CHR_START[d.channel]
+                prev_chr_list[d.note] = self.V_CHR_ON
+            else:
+                v_data[d.abs_time][d.note] = self.V_CHR_STOP[d.channel]
+                prev_chr_list[d.note] = self.V_CHR_OFF
+
+        self._log.debug('note_min/max=%s', (note_min, note_max))
+
+        for k in sorted(v_data.keys()):
+            v_data[k] = ''.join(v_data[k][note_min:note_max+1])
+
+        out_data = {
+            'note_min': note_min,
+            'note_max': note_max,
+            'data': v_data
+        }
+        return out_data
+
+    def print_visual(self, v_data, channel_set):
+        """
+        Parameters
+        ----------
+        v_data: {abs_time: v_str}
+        channel_set: set of int
+        """
+        self._log.debug('note_min/max=%s', (
+            v_data['note_min'], v_data['note_max']))
+        self._log.debug('channel_set=%s', channel_set)
+
+        note_min = v_data['note_min']
+        note_max = v_data['note_max']
+
+        for i in [0, 1, 2]:
+            print('%8s|' % ' ', end='')
+            for n in range(note_min, note_max+1):
+                print(('%03d' % (n))[i], end='')
+
+            print('|')
+
+        print('--------+' + '-' * (note_max - note_min + 1) + '+')
+
+        for abs_time in v_data['data'].keys():
+            print('%08.3f|%s|' % (abs_time, v_data['data'][abs_time]))
+
+        print('--------+' + '-' * (note_max - note_min + 1) + '+')
+
+        for i in [0, 1, 2]:
+            print('%8s|' % ' ', end='')
+            for n in range(note_min, note_max+1):
+                print(('%03d' % (n))[i], end='')
+
+            print('|')
+
+        print()
+
+        for c in sorted(list(channel_set)):
+            print('CH(%2d): %s--%s' % (
+                c, self.V_CHR_START[c], self.V_CHR_STOP[c]))

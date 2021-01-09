@@ -25,6 +25,8 @@ class Player:
     SEC_MIN = 0.02  # sec
     SEC_MAX = 1.20  # sec
 
+    FIRST_DELAY_MAX = 3  # sec
+
     def __init__(self, rate=DEF_RATE, debug=False):
         """ Constructor
 
@@ -84,7 +86,7 @@ class Player:
             if key in self._snd.keys():
                 continue
 
-            self.__log.debug('(%4d) new key: %s', i, key)
+            # self.__log.debug('(%4d) new key: %s', i, key)
 
             freq = note2freq(note_info.note)
             sec = self.within_range(note_info.length(), sec_min, sec_max)
@@ -127,7 +129,7 @@ class Player:
             now = time.time() - my_clock_base
 
             self.play_sound(note_info, sec_min, sec_max)
-            print('%08.3f/%s' % (now, note_info))
+            print('%08.3f / %s' % (now, note_info))
 
     def play(self, parsed_midi,  # pylint: disable=too-many-locals
              pos_sec=0.0,
@@ -183,6 +185,11 @@ class Player:
             delay = note_info.abs_time - abs_time
             self.__log.debug('delay=%s', delay)
 
+            if i == 0 and delay > self.FIRST_DELAY_MAX:
+                self.__log.warning('delay:%s too long ..', delay)
+                delay = self.FIRST_DELAY_MAX
+                self.__log.warning('[fix] delay=%s', delay)
+
             if delay > 0:
                 delay -= clock_delay  # time adjustment
                 if delay <= 0:
@@ -197,7 +204,7 @@ class Player:
             now = time.time() - my_clock_base
 
             clock_delay = now - note_info.abs_time
-            self.__log.debug('%8.3f/%8.3f clock_delay=%s',
+            self.__log.debug('%8.3f / %8.3f clock_delay=%s',
                              now, note_info.abs_time, clock_delay)
 
             abs_time = note_info.abs_time
