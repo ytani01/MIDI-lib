@@ -129,7 +129,7 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 @click.group(invoke_without_command=True,
              context_settings=CONTEXT_SETTINGS, help='''
-python3 -m midi_tools COMMAND [OPTIONS] [ARGS] ...
+midilib Apps
 ''')
 @click.pass_context
 def cli(ctx):
@@ -140,6 +140,7 @@ def cli(ctx):
         print()
         print(ctx.get_help())
     else:
+        print()
         pass
 
 
@@ -246,4 +247,4 @@ def wav(freq, outfile,  # pylint: disable=too-many-arguments
 
 
 if __name__ == '__main__':
-    cli(prog_name='python -m midilib')
+    cli(prog_name='MidiLib')
