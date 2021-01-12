@@ -51,14 +51,12 @@ class NoteInfo:
         str_data: str
 
         """
-        str_data = '%08.3f:' % self.abs_time
-        str_data += ' channel=%02d, note:%03d, velocity:%03d' % (
-            self.channel, self.note, self.velocity)
+        str_data = 'start:%08.3f channel:%02d note:%03d velocity:%03d' % (
+            self.abs_time, self.channel, self.note, self.velocity)
 
-        if self.end_time is not None and self.end_time != self.abs_time:
-            if isinstance(self.end_time, float):
-                str_data += ' ... end:%08.3f' % (self.end_time)
-                str_data += ' (%.2f sec)' % (self.length())
+        if self.end_time and isinstance(self.end_time, float):
+            str_data += ' end:%08.3f length:%05.2f' % (
+                self.end_time, self.length())
 
         return str_data
 
@@ -323,14 +321,14 @@ class Parser:
         v_data = []
         prev_chr_list = [self.V_CHR_OFF] * self.MIDI_NOTE_N
         on_count = [0] * self.MIDI_NOTE_N
-        
+
         for e in ev:
             v_data.append({'abs_time': e['abs_time'],
                            'chr': copy.deepcopy(prev_chr_list)})
 
             for e1 in e['event']:
                 note = e1['note']
-                
+
                 note_min = min(note, note_min)
                 note_max = max(note, note_max)
 
