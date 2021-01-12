@@ -244,9 +244,15 @@ class Parser:
 
         data2 = self.set_end_time(data1)
 
+        # remove velocity == 0
+        data3 = []
+        for d in data2:
+            if d.velocity > 0:
+                data3.append(d)
+
         out_data = {
             'channel_set': self._channel_set,
-            'note_info': data2
+            'note_info': data3
         }
         return out_data
 
